@@ -4,17 +4,26 @@
 Anaconda es una distribución libre utilizada para los lenguajes de programación Python y R con el objetivo de realizar aprendizaje automático y ciencia de datos. Entre sus paquetes se encuentra Jupyter Notebook.
 
 \subsection{Jupyter Notebook}
-Jupyter Notebook es un entorno de programación para Python basado en la web. Se pueden crear varios notebooks con celdas de código o texto para conseguir una estructura limpia y ordenada.
+Jupyter Notebook es un entorno de programación para Python basado en la web. Se pueden crear varios notebooks con celdas de código o texto para conseguir una estructura limpia y ordenada. Además, estos notebooks pueden ser usados para otros lenguajes de programación como Julia o R.
 
 \section{Bibliotecas}
 \subsection{OpenCV}
-Es una biblioteca de Python utilizada para visión artificial y es considerada la más popular. Tiene diversos usos, entre ellos destacan el reconocimiento de objetos y la detección de movimiento.
+Es una biblioteca de Python utilizada para visión artificial y es considerada la más popular. Tiene diversos usos, entre ellos destacan el reconocimiento de objetos y la detección de movimiento.\cite{wiki:opencv}
 
 \subsection{Numpy}
-Es una biblioteca de Python utilizada para realizar operaciones matemáticas. También se usa para crear vectores y matrices grandes multidimensionales.
+Es una biblioteca de Python utilizada para realizar operaciones matemáticas. También se usa para crear vectores y matrices grandes multidimensionales.\cite{wiki:numpy}
 
 \subsection{Pandas}
-Es una biblioteca de Python utilizada para el análisis de datos. Mediante \textit{dataframes} se pueden recoger datos de hojas de cálculo o bases de datos, almacenarlos para ser tratados en el código y después guardarlos de nuevo.
+Es una biblioteca de Python utilizada para el análisis de datos. Mediante \textit{dataframes} se pueden recoger datos de hojas de cálculo o bases de datos, almacenarlos para ser tratados en el código y después guardarlos de nuevo.\cite{wiki:pandas}
 
 \subsection{Mediapipe}
 Es una biblioteca de Pyhton utilizada para visión artificial. Una de las funcionalidades que tiene es la de reconocer y enumerar con puntos una mano.
+\begin{itemize}
+\item \textit{solutions.hands}: este paquete realiza el reconocimiento de la mano para asignar unos puntos. Hay 21 puntos repartidos por toda la mano, los más interesantes para este proyecto son el 4 (dedo pulgar) y el 8 (dedo índice).
+\item \textit{solutions.drawing\_utils}: este paquete es el que se encarga de dibujar los puntos y las conexiones entre ellos sobre la mano.
+\end{itemize}
+\subsection{SciPy}
+Es una biblioteca de Python utilizada para realizar tareas de ciencia e ingeniería como optimización, álgebra lineal, interpolación o procesamiento de señales.\cite{wiki:scipy}
+\begin{itemize}
+\item \textit{signal}: es el módulo que sirve para realizar procesados de señales como convolución o filtrado, entre otros.\cite{scipysignal}
+\end{itemize}
