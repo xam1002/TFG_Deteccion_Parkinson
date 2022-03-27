@@ -1,2 +1,26 @@
 \capitulo{2}{Objetivos del proyecto}
 
+En este apartado se van a exponer los objetivos más importantes de este proyecto.
+
+\subsection{Investigar sobre el aprendizaje de las máquinas}
+Este objetivo es la base del trabajo, ya que, utilizando la inteligencia artificial se pueden conseguir avances en múltiples áreas, entre ellas, la medicina como es en este caso. La inteligencia artificial puede ayudar a los profesionales a realizar sus tareas, e incluso puede servir de apoyo para aquellos que no lo son.
+
+Aunque todavía queda mucho por saber, las técnicas que se conocen en la actualidad pueden ser explotadas para facilitar la vida de las personas. En este proyecto, se utiliza la visión artificial, que es una de las ramas más importantes de la inteligencia artificial. Por ello, este trabajo está motivado por la investigación de cómo podría una máquina aprender de los expertos, sin sustituirles, siendo una ayudante.
+
+Para conseguir este objetivo, es necesario haber investigado en los campos de la minería de datos y de sistemas inteligentes, para extraer características con las que enseñar a la máquina y para hacerle aprender. Dado que se conoce que una persona que padece Parkinson tiene dificultades a la hora de mover sus manos, se pueden extraer características y compararlas con aquellas personas sanas para poder diferenciar a los que tienen la enfermedad de los que no.
+
+Existen varios proyectos que también buscan este mismo objetivo, pero cada uno utiliza técnicas diferentes. Por esta razón, en este proyecto se pretende innovar y buscar otra solución para poder detectar el Parkinson, ofreciendo a los pacientes y a los expertos otra posibilidad de facilitar el trabajo.
+
+\subsection{Diseñar e implementar una aplicación web para detectar el Parkinson}
+Como se ha detallado al comienzo del documento, el Parkinson es una enfermedad muy común, por lo que una aplicación enfocada a facilitar su identificación puede ayudar al equipo médico encargado y a los pacientes, de forma que se pueda realizar el tratamiento correspondiente cuanto antes para disminuir los daños.
+
+Este objetivo trata de crear una aplicación que, dado un vídeo de una mano realizando movimiento de pinza (con los dedos índice y pulgar), consiga detectar si ese usuario tiene Parkinson o no.
+
+Para ello, la aplicación medirá la distancia máxima cada vez que la pinza se abra (las distancias más lejanas entre ambos dedos), además de la velocidad con la que la pinza se abre y se cierra, y obtendrá unos estadísticos, los cuales serán los que identifiquen si es una persona con la enfermedad.
+
+Esto se hará utilizando una biblioteca de visión artificial basada en redes neuronales convolucionales, la cual detecta el esqueleto humano. Dado que en este proyecto se trata con vídeos, la biblioteca detectará los puntos del esqueleto de cada fotograma del vídeo, que habrá que procesarlo para
+obtener los datos en ese instante de tiempo. De los puntos detectados, el punto del dedo índice y el punto del dedo pulgar serán los que se utilicen para detectar cómo la pinza se abre y se cierra.
+
+Los datos obtenidos gracias a esta biblioteca serán procesados, filtrados y utilizados para entrenar modelos de inteligencia artificial. Sobre estos modelos, se construirá un software con el cual, tras obtener un vídeo, se podrá conocer si la persona del vídeo es una persona con Parkinson o no.
+
+Esta manera de detección se puede utilizar ya que se conoce que una persona con Parkinson abre y cierra la pinza más despacio y con menos amplitud que una persona sin Parkinson.
