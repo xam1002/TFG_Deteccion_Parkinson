@@ -5,14 +5,12 @@ Dada la gravedad de la enfermedad, ha habido varios estudios aplicando diversas 
 
 En este apartado se van a exponer aquellos trabajos que también se dedican a detectar el Parkinson y que están relacionados con este proyecto.
 
-\subsection{A new computer vision-based approach to aid the diagnosis of Parkinson's disease\cite{pereira2016new}}
-Este trabajo consiste en realizar unas pruebas a un número de individuos, en los que hay un grupo sin Parkinson y otro grupo con Parkinson. Además, en ambos grupos hay dos sexos y algún zurdo, frente a una mayoría diestra.
+\subsection{A new computer vision-based approach to aid the diagnosis of Parkinson's disease}
+Este trabajo~\cite{pereira2016new} consiste en detectar utilizando técnicas de visión artificial si una persona tiene Parkinson o no mediante dibujos de espirales realizados por varias personas.
 
-A todos los individuos se les pide realizar una prueba en la que hay que dibujar unas formas tal y como se aprecia en la figura \ref{fig:pruebapapel}, tan solo realizando los ejercicios c y d.
+El primer paso es el de realizar una prueba en la que hay que dibujar las formas tal y como se aprecia en la figura \ref{fig:pruebapapel}, tan solo realizando los ejercicios c y d.
 
-Posteriormente, estos ejercicios son digitalizados para realizar la extracción del dibujo realizado, los cuales se enumeran del 1 al 4 para el ejercicio c y del 5 al 8 para el ejercicio d.
-
-Dado que cada individuo realiza 8 dibujos, se acaban obteniendo unos datos, en los que hay pacientes y control.
+Posteriormente, estos ejercicios son digitalizados para realizar la extracción del dibujo realizado, los cuales se enumeran del 1 al 4 para el ejercicio c y del 5 al 8 para el ejercicio d. Dado que cada individuo realiza 8 dibujos, se acaban obteniendo unos datos, en los que hay pacientes y control.
 
 A continuación, el proceso se divide en dos pasos: procesado de imágenes y extracción de características.
 
@@ -24,7 +22,7 @@ El primer paso consiste en separar el dibujo de la persona (HT) del dibujo del p
 	\label{fig:pruebapapel}
 \end{figure}
 
-A la hora de obtener el dibujo del paciente (HT), primeramente se filtran los dibujos para eliminar el ruido, y en el siguiente paso se utiliza una fórmula que actúe como umbral con el fin de obtener una máscara binaria \(M^{i}_{ET}\ (I)\), tal y como se muestra: 
+A la hora de obtener el dibujo del paciente (HT), en primer lugar se filtran los dibujos para eliminar el ruido, y en el siguiente paso se utiliza una fórmula que actúe como umbral con el fin de obtener una máscara binaria \(M^{i}_{ET}\ (I)\), tal y como se muestra: 
 
 \begin{equation}
 	M^{i}_{ET}\ (I) = \left\lbrace\begin{array}{ll}
@@ -50,20 +48,22 @@ Finalmente, se obtienen dos imágenes en cada dibujo: el dibujo del paciente y e
 	\label{fig:resultado}
 \end{figure}
 
-El segundo paso del proceso consiste en extraer características de los dibujos. Para ello se comparan las dos imágenes obtenidas en el primer paso y evaluar cómo de diferentes son. 
+El segundo paso del proceso consiste en extraer características de los dibujos. Para ello se comparan las dos imágenes obtenidas en el primer paso para evaluar cómo de diferentes son. 
 
-Para facilitar el proceso, se utiliza el algoritmo de adelgazamiento Zhang–Suen, que resumidamente se encarga de hacer las trazas de los dibujos aparezcan de forma más fina. Además, se corrigen algunas imperfecciones en las imágenes, como líneas discontinuas.
+Para facilitar el proceso, se utiliza el algoritmo de adelgazamiento Zhang–Suen, que resumidamente se encarga de hacer que las trazas de los dibujos aparezcan de forma más fina. Además, se corrigen algunas imperfecciones en las imágenes, como líneas discontinuas.
 
-Para ello, se enumeran algunos puntos en las imágenes y se comparan la posición entre dos puntos equivalentes para conocer la desviación del dibujo del paciente con respecto al dibujo de la prueba, obteniendo varios datos con las características de los datos. 
+Después, se enumeran algunos puntos en las imágenes y se compara la posición entre dos puntos equivalentes para conocer la desviación del dibujo del paciente con respecto al dibujo de la prueba, obteniendo varios datos con las características de los dibujos. 
 
 También se obtienen datos obteniendo la distancia entre algunos puntos aleatorios de ambas espirales al centro, ya que la desviación del dibujo del paciente afecta también en su enfermedad de Parkinson.
 
 Finalmente, se entrenan los modelos para detectar el Parkinson con todos los datos obtenidos en el paso anterior.
 
+El experimento que se llevó a cabo albergaba dos grupos de personas: uno con gente sin Parkinson y otro con gente con Parkinson. Además, se mezcló en ambos grupos los dos sexos y algún zurdo, frente a una mayoría diestra.
+
 \subsection{Proposing a Three-Stage Model to Quantify
 	Bradykinesia on a Symptom Severity Level
-	Using Deep Learning\cite{jaber2021proposing}}
-Este proyecto es similar al que se trata en este documento, ya que también se basa en recoger datos procesando la mano haciendo un movimiento de pinza.
+	Using Deep Learning}
+Este proyecto~\cite{jaber2021proposing} es similar al que se trata en este documento, ya que también se basa en recoger datos procesando la mano haciendo un movimiento de pinza.
 
 Para ello, se procesan varios vídeos con la mano, tanto izquierda como derecha, habiendo además varios de control. El movimiento realizado debe ser lo más rápido y amplio posible durante 10 segundos.
 
@@ -103,4 +103,19 @@ Estos datos obtenidos se utilizan para realizar cálculos con los que sacar conc
 
 Finalmente, los datos se representan en gráficas observar las diferencias de las personas que padecen Parkinson de las que no y con ello alcanzar conclusiones.
 
+\subsection{Tabla de medidas}
+En esta sección se recoge de manera resumida en una tabla aquellas medidas que han sido utilizadas en los trabajos expuestos anteriormente.
 
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{| c | c | c | c | c | c |}
+			\hline
+			Trabajo & Amplitud & Tiempo & Velocidad & Ritmo & Comparación \\ \hline
+			1 &  &  &  &  & X \\
+			2 & X & X & X & X & \\ 
+			Este trabajo & X &  &  &  & \\ \hline
+		\end{tabular}
+		\caption{Tabla que resume las medidas utilizadas para detectar el Parkinson.}
+		\label{tab:fruta}
+	\end{center}
+\end{table}
