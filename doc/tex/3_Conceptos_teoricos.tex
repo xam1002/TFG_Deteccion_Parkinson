@@ -8,30 +8,9 @@ Dado que este proyecto se fundamenta en obtener datos a partir de vídeos, es ne
 \subsection{Vídeos}
 Para que los vídeos sean procesados, es necesario que exista un proceso de lectura de los fotogramas. Además, en ocasiones se desea que los fotogramas sean guardados con el procesado realizado. Esto es lo que se conoce como objetos de vídeo. Un objeto de vídeo puede ser de lectura, cuando se pretende leer los fotogramas del vídeo, o de escritura, cuando se pretende guardar imágenes en forma de vídeo.
 
-Leer un vídeo no requiere un mayor conocimiento más allá de conocer el concepto de fotograma, pero a la hora de escribir un vídeo es necesario conocer el concepto de codificación. Cuando se desea guardar un vídeo o una colección de fotogramas, se puede codificar en varios tipos, lo cual afectará al tipo de extensión del vídeo. Los codificadores más comunes son:
-\begin{itemize}
-	\item MPEG
-	\item H.264
-	\item MJPEG
-	\item Sorenson
-	\item WMV
-	\item Ogg Theora
-	\item DivX
-	\item XviD	
-\end{itemize}
+Leer un vídeo no requiere un mayor conocimiento más allá de conocer el concepto de fotograma, pero a la hora de escribir un vídeo es necesario conocer el concepto de codificación. Cuando se desea guardar un vídeo o una colección de fotogramas, se puede codificar en varios tipos, lo cual afectará al tipo de extensión del vídeo. Los codificadores más comunes son: MPEG, H.264, MJPEG, Sorenson, WMV, Ogg Theora, DivX y XviD.
 
-Dependiendo del uso que se le vaya a dar al vídeo, conviene utilizar una codificación u otra, dando lugar a extensiones de vídeo diferentes. Estas extensiones definen el tipo de formato del vídeo. Los más comunes son:
-
-\begin{itemize}
-	\item AVI
-	\item MOV
-	\item MP4
-	\item ASF
-	\item OGG
-	\item FLV
-	\item MKV
-	\item VOB
-\end{itemize}
+Dependiendo del uso que se le vaya a dar al vídeo, conviene utilizar una codificación u otra, dando lugar a extensiones de vídeo diferentes. Estas extensiones definen el tipo de formato del vídeo. Los más comunes son: AVI, MOV, MP4, ASF, OGG, FLV, MKV y VOB.
 
 Los vídeos están formados por varias imágenes consecutivas capturadas y reproducidas a cierta velocidad. Esta velocidad se mide en FPS (fotogramas por segundo). Normalmente, los vídeos se capturan a una velocidad de 30 fps y la velocidad de reproducción suele ser la misma, dado que en caso de que una fuese superior a la otra el vídeo se vería acelerado o decelerado. 
 
@@ -47,8 +26,9 @@ Una vez comprendidos los conceptos a la hora de procesar vídeos, viene el paso 
 Mediante el objeto de lectura, se van extrayendo todos los fotogramas para procesarlos uno a uno. En cada fotograma, se dibujarán los puntos unidos mediante líneas, tal y como se aprecia en la figura~\ref{fig:puntosmano}. Sin embargo, en este trabajo, sólo serán importantes dos de ellos: el 4 y el 8, ya que son los que representan las puntas de los dedos pulgar e índice respectivamente.
 
 \begin{figure}[h]
-	\includegraphics[width=1\textwidth]{puntos_mano}
-	\caption{Puntos de la mano y su nombre~\cite{mediapipehands}.}
+	\includegraphics[width=0.9\textwidth]{puntos_mano}
+	\centering
+	\caption[Puntos de la mano y su nombre.]{Puntos de la mano y su nombre~\cite{mediapipehands}.}
 	\label{fig:puntosmano}
 \end{figure}
 
@@ -58,13 +38,14 @@ Una vez establecidos los puntos, se van a obtener las coordenadas de cada fotogr
 Dado que la obtención de los datos del paso anterior no es perfecta, hay que utilizar alguna técnica para eliminar el posible ruido que la biblioteca ha podido ocasionar. Este ruido viene dado porque entre fotogramas, la biblioteca puede detectar el dedo en lugares diferentes sin que este se haya movido, provocando que la amplitud de la pinza se vea afectada.
 
 \subsection{Filtro de Savitzky–Golay}
-Este filtrado~\cite{wiki:savgol} ha sido utilizado para eliminar algunas imperfecciones de los datos. Se basa en el cálculo de una regresión polinomial local de grado k con al menos k+1 puntos equiespaciados que determinan el valor de un nuevo punto. Esto hará que los datos varíen y se suavice la gráfica. 
+Este filtrado~\cite{wiki:savgol} ha sido utilizado para eliminar algunas imperfecciones de los datos. Se basa en el cálculo de una regresión polinomial local de grado $k$ con al menos $k+1$ puntos equiespaciados que determinan el valor de un nuevo punto. Esto hará que los datos varíen y se suavice la gráfica. 
 
 Al dibujar los datos en forma de gráfica, como se observa en la figura \ref{fig:graficadistancias}, se puede apreciar cómo algunas zonas no establecen un único máximo o el máximo podría estar exagerado, por lo que es necesario suavizar esos picos para obtener un solo máximo. 
 
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{grafica_distancias}
-	\caption{Representación gráfica de los datos obtenidos en uno de los vídeos sin filtrado (azul) y con filtrado (naranja).}
+	\centering
+	\caption[Representación gráfica de los datos obtenidos en uno de los vídeos con y sin filtrado.]{Representación gráfica de los datos obtenidos en uno de los vídeos sin filtrado (azul) y con filtrado (naranja).}
 	\label{fig:graficadistancias}
 \end{figure}
 
@@ -72,48 +53,9 @@ La figura \ref{fig:graficadistanciaszoom} muestra uno de los picos de forma ampl
 
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{grafica_distancias_zoom}
-	\caption{Ampliación de uno de los picos donde se aprecia la curva sin suavizar (azul) de la suavizada con el filtro (naranja).}
+	\caption[Ampliación de uno de los picos donde se aprecia la curva con y sin suavizado.]{Ampliación de uno de los picos donde se aprecia la curva sin suavizar (azul) de la suavizada con el filtro (naranja).}
 	\label{fig:graficadistanciaszoom}
 \end{figure}
-
-\section{Obtención de características}
-A partir de los datos obtenidos en los pasos anteriores, se buscan otros datos que caractericen a los vídeos con el fin de poder realizar una clasificación.
-
-\subsection{Amplitud}
-Esta característica es la más evidente ya que, generalmente, la gente con Parkinson ven dificultad a la hora de abrir y cerrar la mano hasta su punto máximo.
-
-Para su extracción, en primer lugar, se ha recogido los máximos y mínimos de la gráfica de los 5 primeros movimientos y de los 5 últimos. Después, estos datos se normalizan para que no afecte la distancia de la mano a la cámara. Esta normalización se obtiene de la siguiente fórmula:
-
-\begin{equation}
-	X_{normalizada} = \frac{X_{actual} - X_{mínima}}{X_{máxima}-X_{mínima}}
-\end{equation}
-
-Para la extracción de las distancias, tanto la original como la normalizada, tan solo hay que restar el mínimo con el máximo correspondiente. La diferencia de estas distancias de las obtenidas en el apartado anterior es que en estas ahora se tiene en cuenta la distancia entre los dos dedos entre un máximo y un mínimo descontando la pequeña distancia que hay desde la superficie de un dedo hasta el centro donde se encuentra el punto para que la distancia sea más real.
-
-\subsection{Tiempo}
-Otra de las características que podrían afectar a una persona que tiene Parkinson es cuánto tardaría en realizar el movimiento de pinza, ya que, en un principio, aquellos que padezcan la enfermedad tardarán más.
-
-Para ello, se ha realizado la diferencia entre un máximo y el mínimo correspondiente, pero en este caso, para obtener el número de fotogramas que hay entre ambos puntos, con el fin de utilizar como unidad temporal el número de fotogramas, ya que, a más lentitud, más fotogramas habrá de diferencia y viceversa.
-
-Sin embargo, esta medida resulta no ser suficiente porque no se tiene en cuenta cuánto se ha abierto la pinza, es decir, alguien que abra la pinza lentamente y hasta la mitad tardará el mismo tiempo que alguien que la abra más rápido y hasta el máximo.
-
-\subsection{Velocidad}
-Para solucionar el problema anterior, se puede utilizar la velocidad. Esto es, calcular la distancia recorrida por unidad de tiempo, por lo que dependiendo de cuánto se recorra y en cuánto tiempo una persona tendrá más velocidad o no.
-
-En una primera instancia, una persona que padece Parkinson, dada su reducida movilidad, pese a abrir la pinza hasta su punto máximo, lo más seguro es que lo hiciera de forma más lenta que otra persona sin Parkinson.
-
-Esta velocidad se calcula realizando la división de la diferencia normalizada entre un máximo y un mínimo (i. e. la amplitud ya calculada), entre el tiempo que les separa a ambos puntos (i. e. el tiempo ya calculado).
-
-\subsection{Mano derecha o izquierda}
-Como añadido, también se ha tenido en cuenta si la mano es derecha o izquierda. En un principio, podría resultar interesante conocer cuál es la mano que más dificultades tiene a la hora de realizar el movimiento, aunque tampoco resulta fundamental para clasificar. Esta característica no es calculada, sino que viene dada con el vídeo.
-
-\subsection{Sexo}
-El sexo de la persona podría servir para clasificar las personas con y sin Parkinson. Como se ha mencionado en la introducción de este documento, el Parkinson es más propenso a aparecer en hombres, por lo que, en primera instancia, podría haber más hombres con Parkinson que mujeres, o lo que es lo mismo, más mujeres sin Parkinson que hombres, lo cual podría ayudar a la hora de clasificar. AL igual que con la mano, esta característica no es calculada, sino que viene dada con el vídeo.
-
-\subsection{Edad}
-De forma similar a lo que ocurre con el sexo, el Parkinson es más propenso en personas mayores, de 60 años, por lo que la edad también podría resultar interesante a la hora de clasificar.
-
-Sin embargo, hay que tener cuidado con los ejemplos a la hora de entrenar modelos, ya que el sistema podría aprender que todos los menores de, por ejemplo, 30 años nunca tendrán Parkinson, cuando esto no es cierto. Esta característica tampoco no es calculada, también viene dada con el vídeo.
 
 \section{Minería de datos}
 Este punto trata de encontrar patrones en los datos que sirvan para clasificar. Para el problema planteado de predicción, hay que utilizar la clasificación.
@@ -139,7 +81,7 @@ La validación cruzada es una técnica que se utiliza a la hora de entrenar y pr
 
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{validacion_cruzada}
-	\caption{Validación cruzada dividendo el conjunto de ejemplos en 4 partes.\cite{wiki:valcruzada}}
+	\caption[Validación cruzada dividendo el conjunto de ejemplos en 4 partes.]{Validación cruzada dividendo el conjunto de ejemplos en 4 partes.\cite{wiki:valcruzada}}
 	\label{fig:valcruzada}
 \end{figure}
 
@@ -158,4 +100,70 @@ Una de las formas más sencillas de encontrar patrones en los datos es utilizand
 \end{itemize}
 
 \section{Evaluación de los resultados}
-Una vez utilizado cada modelo, se evalúan cómo de buenos son los resultados para quedarse con el que mejor clasifique. No obstante, en ocasiones podría haber clasificadores que obtengan un 100 \% de precisión, lo cual no es bueno ya que es muy extraño que un clasificador no tenga ningún error en la predicción.
+A la hora de evaluar los resultados, es importante realizar un estudio de los datos obtenidos para poder valorar correctamente los resultados.
+
+\subsection{Predicciones}
+Cuando se utiliza un clasificador, se realizan varias predicciones con el conjunto de test. En esta ocasión, hay dos clases posibles: sin Parkinson (0) o con Parkinson (1), por lo que pueden ocurrir cuatro posibilidades:
+
+\begin{itemize}
+	\item Verdadero positivo o \textit{true positive}: ocurre cuando una clase se predice correctamente y además es positiva. En este caso, sería que el clasificador ha predicho un 1 (positivo) y ha acertado. Suele indicarse como TP.
+	\item Verdadero negativo o \textit{true negative}: ocurre cuando una clase se predice correctamente y además es negativa. En este caso, sería que el clasificador ha predicho un 0 (negativo) y ha acertado. Suele indicarse como TN.
+	\item Falso positivo o \textit{false positive}: ocurre cuando una clase no se predice correctamente y además es positiva. En este caso, sería que el clasificador ha predicho un 1 (positivo) y ha fallado. Suele indicarse como FP.
+	\item Falso negativo o \textit{false negative}: ocurre cuando una clase no se predice correctamente y además es negativa. En este caso, sería que el clasificador ha predicho un 0 (negativo) y ha fallado. Suele indicarse como FN.
+	
+\end{itemize}
+
+\subsection{Medidas}
+Las medidas son formas de representar los resultados para obtener diferentes puntos de vista a la hora de evaluar los resultados. Las medidas utilizadas en este TFG son:
+
+\begin{itemize}
+	\item \textit{accuracy}: con esta medida se podrá obtener la precisión que ha tenido el clasificador. Esto es, el porcentaje de aciertos que ha habido. La fórmula que se utiliza es la siguiente:
+	\begin{equation}
+		accuracy = \frac{TP + TN}{TP + TN + FP + FN}
+	\end{equation}
+
+	\item \textit{Matthews correlation coefficient}: esta mediada es utilizada para conocer la calidad de una clasificación binaria. La fórmula para obtener esta medida es la siguiente:
+	\begin{equation}
+		MCC = \frac{TP\times TN-FP\times FN}{\sqrt{(TP+FP)\times(TP+FN)\times(TN+FP)\times(TN+FN)}}
+	\end{equation}
+
+	\item \textit{f1}: esta medida es utilizada para recoger las medidas de \textit{precision} y \textit{recall} en una sola medida. La medida \textit{precision} sirve para conocer los aciertos que ha habido en una clase concreta y la medida \textit{recall} sirve para conocer cuántos ejemplos han sido clasificados como una clase concreta. Estas fórmulas son las siguientes:
+	\begin{align}
+		precision &= \frac{TP}{TP+FP} &
+		recall &= \frac{TP}{TP+FN}
+	\end{align}
+	
+	Y la fórmula para obtener la medida f1 es la siguiente:
+	\begin{equation}
+		f1 = 2\times \frac{precision\times recall}{precision + recall}
+	\end{equation}
+
+	\item \textit{roc\_auc}: esta medida es el área bajo la curva ROC y representa cómo de bueno es un modelo a la hora de diferenciar una clase de otra. Dado que esta métrica es más complicada que las anteriores, más abajo se explica de forma más detallada.
+	\item \textit{g\_mean}: esta medida es la media geométrica de la sensibilidad y la especificidad y trata de mostrar la precisión de las clases manteniendo las precisiones de forma equilibrada. Las fórmulas de sensibilidad y especificidad, se pueden ver más abajo. La fórmula para obtener esta medida es la siguiente:
+	\begin{equation}
+		g\_mean = \sqrt{sensibilidad \times especificidad}
+	\end{equation}
+\end{itemize}
+
+\subsection{Curva ROC}
+La curva ROC~\cite{wiki:roc} (\textit{Receiver Operating Characteristic}) es una representación gráfica utilizada para conocer la proporción de positivos bien clasificados y los positivos mal clasificados.
+
+La curva ROC representada gráficamente tiene como eje $x$ la 1-especificidad y como eje $y$ la sensibilidad. La especificidad corresponde a los ejemplos negativos bien clasificados, o lo que es lo mismo, 1 menos los ejemplos positivos mal clasificados; y la sensibilidad corresponde a los ejemplos positivos bien clasificados. Sus correspondientes fórmulas son las siguientes:
+
+\begin{align}
+	especificidad &= \frac{TN}{FP+TN} &
+	sensibilidad &= \frac{TP}{TP+FN}
+\end{align}
+
+Para dibujar la curva ROC habría que recoger varios resultados de un modelo y unir esos puntos para formar la curva, de forma que quede de forma similar que en la figura \ref{fig:roc}, en donde se visualizan tres tipos de curvas ROC que representan clasificaciones de mejor a peor.
+
+\begin{figure}[h]
+	\includegraphics[width=1\textwidth]{curvas_roc}
+	\caption[Tres tipos de curvas ROC.]{Tres tipos de curvas ROC~\cite{wiki:roc}.}
+	\label{fig:roc}
+\end{figure}
+
+\subsection{Área bajo la curva ROC}
+El área bajo la curva ROC (\textit{Area Under the ROC Curve}) es la medida con la que conocer cómo de bien un modelo diferencia una clase de otra.
+
+Este área no es más que el cálculo de todo el área que hay debajo de la curva ROC. Los valores obtenidos estarán en el intervalo [0,1]. Los valores comprendidos entre 0 y 0.5 indican que el modelo confunde una clase con otra en su mayor parte, mientras que los valores comprendidos entre 0.5 y 1 indican que el modelo predice correctamente la mayoría de ejemplos, siendo el valor 1 la perfección. En la figura \ref{fig:roc} se aprecian tres valores AUC para cada curva, mostrando que la primera trata de un clasificador perfecto mientras que la última muestra un clasificador mucho peor.
