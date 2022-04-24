@@ -1,2 +1,59 @@
 \capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
+En este apartado, se detallan los aspectos más relevantes que han ocurrido durante el desarrollo del proyecto, así como la manera en la que el proyecto ha sido realizado para cumplir los objetivos propuestos.
+
+\section{Limpieza de datos}
+Como ya se ha explicado, los datos obtenidos pueden contener ruido que perjudique la tarea que se quiere realizar, en este caso, la clasificación. Por esta razón, es necesario corregirlos de alguna manera.
+
+\subsection{Filtro de Savitzky-Golay}
+En el apartado de conceptos teóricos, ya se mencionó el filtro de Savitzky-Golay, con el que se podían mejorar las gráficas representando los resultados obtenidos.
+
+Estos resultados contienen ruido tanto por el propio pulso de la mano como por la biblioteca que detecta la mano, por lo que su representación en ocasiones muestra demasiados máximos o mínimos parecidos, confundiendo los valores reales.
+
+\subsection{Distancias} 
+Las distancias ya obtenidas no muestran la distancia  real, por lo que es necesario realizar un paso previo antes de calcular el resto de características que dependen de la distancia. 
+
+Dado que la pinza cerrada es el momento en el que menos distancia hay, lo lógico sería pensar que esta distancia es 0, sin embargo, esto no ocurre debido a la localización de los puntos de los dedos. Estos puntos no están justo en la yema de los dedos, donde la pinza se cierra, sino que están en el centro del dedo, por lo que la distancia entre esos puntos nunca será 0, aunque sí muy próxima, es decir, las distancias mínimas nunca serán 0. Al igual que sucede con las distancias mínimas, también las distancias máximas se ven afectadas, y en general, todas las distancias. Por esta razón, se realizan nuevamente las restas de los máximos y mínimos de las distancias anteriormente calculadas para que los nuevos mínimos alcancen valores mucho más cercanos al 0. 
+
+Para comprender esto mejor, se va a suponer que una distancia mínima entre los dos dedos es de 0,051 y una distancia máxima es de 0,376. Al igual que el 0,051 no es el mínimo real, pues lo lógico sería que fuese 0, la verdadera amplitud máxima tampoco sería real, pues debería contar desde el 0. Para obtener la distancia real habría que obtener la diferencia entre el máximo y el mínimo, para conocer la distancia que les separa, es decir, la amplitud de la pinza, que sería 0,325. 
+
+Realmente, todos los puntos no están recogiendo valores reales, sin embargo, dado que sólo interesa recoger la distancia máxima, únicamente se realiza la diferencia entre máximos y mínimos.
+
+\section{Obtención de características}
+En este punto se trata de buscar otros datos que caractericen a los vídeos con el fin de poder realizar una clasificación. Habrá datos calculados y datos que ya vienen dados.
+
+\subsection{Amplitud}
+Esta característica es la más evidente ya que, generalmente, la gente con Parkinson ven dificultad a la hora de abrir y cerrar la mano hasta su punto máximo.
+
+Para su extracción, en primer lugar, se han recogido los máximos y mínimos de la gráfica de los 5 primeros movimientos y de los 5 últimos. Después, estos datos se normalizan para que no afecte la distancia de la mano a la cámara. Esta normalización se obtiene de la siguiente fórmula:
+
+\begin{equation}
+	X_{normalizada} = \frac{X_{actual} - X_{mínima}}{X_{máxima}-X_{mínima}}
+\end{equation}
+
+Para la extracción de las distancias, tanto la original como la normalizada, tan solo hay que restar el mínimo con el máximo correspondiente. 
+
+\subsection{Tiempo}
+Otra de las características que podrían afectar a una persona que tiene Parkinson es cuánto tardaría en realizar el movimiento de pinza, ya que, en un principio, aquellos que padezcan la enfermedad tardarán más.
+
+Para ello, se ha realizado la diferencia entre un máximo y el mínimo correspondiente, pero en este caso, para obtener el número de fotogramas que hay entre ambos puntos, con el fin de utilizar como unidad temporal el número de fotogramas, ya que, a más lentitud, más fotogramas habrá de diferencia y viceversa.
+
+Sin embargo, esta medida resulta no ser suficiente porque no se tiene en cuenta cuánto se ha abierto la pinza, es decir, alguien que abra la pinza lentamente y hasta la mitad tardará el mismo tiempo que alguien que la abra más rápido y hasta el máximo.
+
+\subsection{Velocidad}
+Para solucionar el problema anterior, se puede utilizar la velocidad. Esto es, calcular la distancia recorrida por unidad de tiempo, por lo que dependiendo de cuánto se recorra y en cuánto tiempo una persona tendrá más velocidad o no.
+
+En una primera instancia, una persona que padece Parkinson, dada su reducida movilidad, pese a abrir la pinza hasta su punto máximo, lo más seguro es que lo hiciera de forma más lenta que otra persona sin Parkinson.
+
+Esta velocidad se calcula realizando la división de la diferencia normalizada entre un máximo y un mínimo (\textit{i. e.} la amplitud ya calculada), entre el tiempo que les separa a ambos puntos (\textit{i. e.} el tiempo ya calculado).
+
+\subsection{Mano derecha o izquierda}
+Como añadido, también se ha tenido en cuenta si la mano es derecha o izquierda. En un principio, podría resultar interesante conocer cuál es la mano que más dificultades tiene a la hora de realizar el movimiento, aunque tampoco resulta fundamental para clasificar. Esta característica no es calculada, sino que viene dada con el vídeo.
+
+\subsection{Sexo}
+El sexo de la persona podría servir para clasificar las personas con y sin Parkinson. Como se ha mencionado en la introducción de este documento, el Parkinson es más propenso a aparecer en hombres, por lo que, en primera instancia, podría haber más hombres con Parkinson que mujeres, o lo que es lo mismo, más mujeres sin Parkinson que hombres, lo cual podría ayudar a la hora de clasificar. Al igual que con la mano, esta característica no es calculada, sino que viene dada con el vídeo.
+
+\subsection{Edad}
+De forma similar a lo que ocurre con el sexo, el Parkinson es más propenso en personas mayores, de 60 años, por lo que la edad también podría resultar interesante a la hora de clasificar.
+
+Sin embargo, hay que tener cuidado con los ejemplos a la hora de entrenar modelos, ya que el sistema podría aprender que todos los menores de, por ejemplo, 30 años nunca tendrán Parkinson, cuando esto no es cierto. Esta característica tampoco es calculada, también viene dada con el vídeo.
 
