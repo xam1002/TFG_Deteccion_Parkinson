@@ -18,7 +18,7 @@ El primer paso consiste en separar el dibujo de la persona (HT) del dibujo del p
 
 \begin{figure}[ht]
 	\includegraphics[width=1\textwidth]{prueba_papel}
-	\caption{Prueba a papel que realizó una persona con Parkinson en este proyecto (a) y la hoja en blanco de la prueba (b)~\cite{pereira2016new}.}
+	\caption[Prueba a papel que realizó una persona con Parkinson en este proyecto y la hoja en blanco de la prueba.]{Prueba a papel que realizó una persona con Parkinson en este proyecto (a) y la hoja en blanco de la prueba (b)~\cite{pereira2016new}.}
 	\label{fig:pruebapapel}
 \end{figure}
 
@@ -44,7 +44,7 @@ Finalmente, se obtienen dos imágenes en cada dibujo: el dibujo del paciente y e
 
 \begin{figure}[ht]
 	\includegraphics[width=1\textwidth]{resultado_dibujos}
-	\caption{Resultado obtenido en cada dibujo del ejercicio c (a) y del ejercicio d (b)~\cite{pereira2016new}.}
+	\caption[Resultado obtenido en cada dibujo de los ejercicios c y d.]{Resultado obtenido en cada dibujo del ejercicio c (a) y del ejercicio d (b)~\cite{pereira2016new}.}
 	\label{fig:resultado}
 \end{figure}
 
@@ -65,7 +65,7 @@ El preprocesado se realiza utilizando VLC Player para obtener fotogramas de los 
 
 \begin{figure}[]
 	\includegraphics[width=1\textwidth]{mano_etiquetada}
-	\caption{Mano con los dedos índice y pulgar etiquetados~\cite{jaber2021proposing}.}
+	\caption[Mano con los dedos índice y pulgar etiquetados.]{Mano con los dedos índice y pulgar etiquetados~\cite{jaber2021proposing}.}
 	\label{fig:manoetiquetada}
 \end{figure}
 
@@ -80,7 +80,7 @@ Cada recuadro muestra el ID de la clase y la confianza de detección tal y como 
 
 \begin{figure}[]
 	\includegraphics[width=1\textwidth]{mano_etiquetas}
-	\caption{Detección realizada con un ajuste ideal~\cite{jaber2021proposing}.}
+	\caption[Detección realizada con un ajuste ideal.]{Detección realizada con un ajuste ideal~\cite{jaber2021proposing}.}
 	\label{fig:manoetiquetas}
 \end{figure}
 
@@ -110,7 +110,7 @@ Los datos que se extrajeron sirvieron para obtener la amplitud, la velocidad y e
 
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{grafica}
-	\caption{Gráficas donde se visualiza la obtención de la velocidad y de la amplitud (arriba) y la obtención del ritmo (abajo)~\cite{goetz2008mds}.}
+	\caption[Gráficas donde se visualiza la obtención de la velocidad, de la amplitud y del ritmo.]{Gráficas donde se visualiza la obtención de la velocidad y de la amplitud (arriba) y la obtención del ritmo (abajo)~\cite{goetz2008mds}.}
 	\label{fig:grafica}
 \end{figure}
 
@@ -133,7 +133,7 @@ Para ello, se siguió el diagrama que se observa en la figura \ref{fig:diagramac
 
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{diagrama_cara}
-	\caption{Pasos que se siguieron para la realización de este proyecto~\cite{khan2014computer}.}
+	\caption[Pasos que se siguieron para la realización de este proyecto.]{Pasos que se siguieron para la realización de este proyecto~\cite{khan2014computer}.}
 	\label{fig:diagramacara}
 \end{figure}
 
@@ -143,7 +143,7 @@ Para el siguiente paso, el de la detección del movimiento de los dedos, se real
 
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{procesamiento_manos}
-	\caption{Detección de la silueta de cada mano (a), orientación del movimiento (b), posiciones del los dedos índice (c) y la imagen actual (d)~\cite{khan2014computer}.}
+	\caption[Detección de la silueta de cada mano, orientación del movimiento, posiciones del los dedos índice y la imagen actual.]{Detección de la silueta de cada mano (a), orientación del movimiento (b), posiciones del los dedos índice (c) y la imagen actual (d)~\cite{khan2014computer}.}
 	\label{fig:procesamientomanos}
 \end{figure}
 
@@ -151,7 +151,7 @@ Una vez obtenidos las coordenadas del movimiento del paso anterior, en el tercer
 
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{comparacion_cara}
-	\caption{Marcadores rojos puestos en los dedos para detectar la distancia (a) y comparación del algoritmo (azul) y el procesado de los marcadores (rojo) para conocer si el algoritmo ajustaba correctamente (b)~\cite{khan2014computer}.}
+	\caption[Marcadores rojos y comparación del algoritmo y el procesado de los marcadores.]{Marcadores rojos puestos en los dedos para detectar la distancia (a) y comparación del algoritmo (azul) y el procesado de los marcadores (rojo) para conocer si el algoritmo ajustaba correctamente (b)~\cite{khan2014computer}.}
 	\label{fig:comparacioncara}
 \end{figure}
 
@@ -169,10 +169,10 @@ En esta sección se recoge de manera resumida en una tabla aquellas medidas que 
 		\begin{tabular}{| c | c | c | c | c | c |}
 			\hline
 			Trabajo & Amplitud & Tiempo & Velocidad & Ritmo & Comparación \\ \hline
-			1 &  &  &  &  & X \\
-			2 & X & X & X & X & \\ 
-			3 & X & & X & X & \\
-			4 & X & & X & X & X \\
+			R. Pereira et al.~\cite{pereira2016new} &  &  &  &  & X \\
+			R. Jaber et al.~\cite{jaber2021proposing} & X & X & X & X & \\ 
+			Williams et al.~\cite{williams2020discerning} & X & & X & X & \\
+			Khan et al.~\cite{khan2014computer} & X & & X & X & X \\
 			Este trabajo & X & X & X &  & \\ \hline
 		\end{tabular}
 		\caption{Tabla que resume las medidas utilizadas para detectar el Parkinson.}
