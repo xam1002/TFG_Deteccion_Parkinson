@@ -6,24 +6,74 @@ Anaconda es una distribución libre utilizada para los lenguajes de programació
 \subsection{Jupyter Notebook}
 Jupyter Notebook es un entorno de programación para Python basado en la web. Se pueden crear varios notebooks con celdas de código o texto para conseguir una estructura limpia y ordenada. Además, estos notebooks pueden ser usados para otros lenguajes de programación como Julia o R.
 
+\subsection{Flask}
+Flask es un framework que utiliza Python utilizado para crear aplicaciones web. Ofrece sencillez a la hora de programar ya que cuenta con un motor de plantillas que ofrecen la posibilidad de realizar código HTML dinámico.
+
+\subsection{Visual Studio Code}
+Visual Studio Code es un entorno de programación con una amplia variedad de elementos que ayudan a programar. Se puede cargar una carpeta entera y poder ver su contenido en forma de árbol para agilizar el acceso a los ficheros de un proyecto.
+
+\subsection{TeXstudio}
+TeXstudio es un entorno para crear documentos utilizando el lenguaje \LaTeX{}. En él se pueden utilizar los comandos de \LaTeX{}, además de compilar el código y generar el documento PDF.
+
+\subsection{XAMPP}
+XAMPP es un programa que funciona como gestor de bases de datos MySQL y servidores Apache. Además, puede contener otras aplicaciones compatibles con Apache. En este trabajo el servidor de Apache no es utilizado, ya que se utiliza el servidor de Flask, pero es necesario para la base de datos MySQL.
+
+\subsection{draw.io}
+draw.io es un software utilizado para realizar diagramas de flujo, diagramas UML, organigramas, entre otros, con posibilidad de guardarlo en la nube. Contiene una plantilla y diversos bloques para realizar los dibujos.
+
+\subsection{GitHub}
+GitHub es utilizado para realizar control de versiones en gestión de proyectos ágiles. Se puede subir documentos y código sobre el proyecto, asignar tareas, realizar la metodología \textit{Scrum}, entre otros. Este TFG estará alojado en GitHub, así como las tareas asignadas en cada \textit{sprint} de \textit{Scrum}.
+
+\subsection{Pencil}
+Pencil es un programa utilizado para diseñar interfaces mediante dibujo con bloques. Se pueden dibujar gran variedad de pantallas, como aplicaciones de móvil, programas de ordenador o páginas web.
+
 \section{Bibliotecas}
 \subsection{OpenCV}
-Es una biblioteca de Python utilizada para visión artificial y es considerada la más popular. Tiene diversos usos, entre ellos destacan el reconocimiento de objetos y la detección de movimiento.\cite{wiki:opencv}
+Es una biblioteca de Python utilizada para visión artificial y es considerada la más popular. Tiene diversos usos, entre ellos destacan el reconocimiento de objetos y la detección de movimiento.~\cite{wiki:opencv}
 
 \subsection{Numpy}
-Es una biblioteca de Python utilizada para realizar operaciones matemáticas. También se usa para crear vectores y matrices grandes multidimensionales.\cite{wiki:numpy}
+Es una biblioteca de Python utilizada para realizar operaciones matemáticas. También se usa para crear vectores y matrices grandes multidimensionales.~\cite{wiki:numpy}
 
 \subsection{Pandas}
-Es una biblioteca de Python utilizada para el análisis de datos. Mediante \textit{dataframes} se pueden recoger datos de hojas de cálculo o bases de datos, almacenarlos para ser tratados en el código y después guardarlos de nuevo.\cite{wiki:pandas}
+Es una biblioteca de Python utilizada para el análisis de datos. Mediante \textit{dataframes} se pueden recoger datos de hojas de cálculo o bases de datos, almacenarlos para ser tratados en el código y después guardarlos de nuevo.~\cite{wiki:pandas}
 
-\subsection{Mediapipe}
+\subsection{Mediapipe}\label{lib:mediapipe}
 Es una biblioteca de Pyhton utilizada para visión artificial. Una de las funcionalidades que tiene es la de reconocer y enumerar con puntos una mano.
 \begin{itemize}
-\item \textit{solutions.hands}: este paquete realiza el reconocimiento de la mano para asignar unos puntos. Hay 21 puntos repartidos por toda la mano, los más interesantes para este proyecto son el 4 (dedo pulgar) y el 8 (dedo índice).
-\item \textit{solutions.drawing\_utils}: este paquete es el que se encarga de dibujar los puntos y las conexiones entre ellos sobre la mano.
+	\item \textit{solutions.hands}: este paquete realiza el reconocimiento de la mano para asignar unos puntos. Hay 21 puntos repartidos por toda la mano, los más interesantes para este proyecto son el 4 (dedo pulgar) y el 8 (dedo índice). \cite{mediapipehands}
+	\item \textit{solutions.drawing\_utils}: este paquete es el que se encarga de dibujar los puntos y las conexiones entre ellos sobre la mano.
 \end{itemize}
+
 \subsection{SciPy}
-Es una biblioteca de Python utilizada para realizar tareas de ciencia e ingeniería como optimización, álgebra lineal, interpolación o procesamiento de señales.\cite{wiki:scipy}
+Es una biblioteca de Python utilizada para realizar tareas de ciencia e ingeniería como optimización, álgebra lineal, interpolación o procesamiento de señales.~\cite{wiki:scipy}
 \begin{itemize}
-\item \textit{signal}: es el módulo que sirve para realizar procesados de señales como convolución o filtrado, entre otros.\cite{scipysignal}
+	\item \textit{signal}: es el módulo que sirve para realizar procesados de señales como convolución o filtrado, entre otros.~\cite{scipysignal}
 \end{itemize}
+
+\subsection{Matplotlib}
+Es una biblioteca de Python utilizada para realizar representaciones gráficas a partir de conjuntos de datos.
+\begin{itemize}
+	\item \textit{pyplot}: este módulo es utilizado para mostrar gráficos como figuras con el fin de poder configurar, entre más opciones, su tamaño. \cite{plt}
+\end{itemize}
+
+\subsection{Imbalanced learn}
+Es una biblioteca de Python utilizada para realizar aprendizaje automático con conjuntos que no se encuentran equilibrados.
+\begin{itemize}
+	\item \textit{metrics}: este módulo contiene las métricas utilizadas en aprendizaje automático, pero teniendo en cuenta conjuntos de datos desequilibrados. \cite{imblearn}
+\end{itemize}
+
+\subsection{Scikit-learn}
+Es una biblioteca de Python utilizada para realizar aprendizaje automático. Se pueden entrenar modelos de aprendizaje, tanto de regresión como de clasificación, entre otras posibilidades.
+\begin{itemize}
+	\item \textit{ensemble}: este módulo contiene varios ensembles con los que realizar predicciones. \cite{skensemble}
+	\item \textit{metrics}: este módulo contiene un gran número de métricas utilizadas en aprendizaje automático. \cite{skmetrics}
+	\item \textit{model\_selection}: este módulo contiene todos aquellos métodos encargados de realizar selección de datos, como la validación cruzada. \cite{skmodsel}
+	\item \textit{naive\_bayes}: este módulo contiene algoritmos de aprendizaje supervisado basados en el teorema de Naive Bayes. \cite{sknbayes}
+	\item \textit{neighbors}: este módulo contiene los algoritmos de aprendizaje basados en los vecinos más cercanos. \cite{skneighbors}
+	\item \textit{tree}: este módulo contiene los clasificadores basados en árboles de decisión. \cite{sktree}
+	\item \textit{dummy}: este módulo contiene los predictores de clasificación y regresión más sencillos.
+	\item \textit{svm}: este módulo contiene los predictores basados en máquinas de soporte vectorial. \cite{sksvm}
+\end{itemize}
+
+\subsection{Joblib}
+Es una biblioteca de Python utilizada para almacenamiento en disco. Una de las funcionalidades es la de serializar objetos para almacenarlos en disco y después deserializarlos en otro archivo para poder utilizarlos.
