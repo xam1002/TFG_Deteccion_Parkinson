@@ -20,13 +20,42 @@ En ocasiones, podría resultar interesante acelerar o decelerar una colección d
 	\text{aceleración} = \frac{\text{fps}_{\text{reproducción}}}{\text{fps}_{\text{captura}}}
 \end{equation} 
 
+\subsection{Visión artificial}
+La visión artificial es una de las ramas más importantes de la inteligencia artificial, ya que se puede utilizar para ayudar al ser humano a hacer tareas costosas o muy complicadas.
+
+Se basa en enseñar a la máquina qué significa lo que ve, bien sea en imágenes o en vídeos. Esto es, por ejemplo, reconocimiento de formas o colores entre otras características.
+
+Para poder reconocer formas se utilizan lo que se conoce como descriptores de forma, que son unas fórmulas que se utilizan para calcular unos valores que serán los que indiquen qué forma tiene el objeto. Algunos ejemplos de descriptores con sus fórmulas son los siguientes:
+
+\begin{align*}
+	\text{factor de forma} &= \frac{4 \pi \times área}{perímetro^2} &
+	\text{redondez} &= \frac{4 \times área}{\pi diámetro\_máximo^2}
+\end{align*}
+
+\begin{align}
+	\text{convexidad} &= \frac{perímetro\_convexo}{perímetro} &
+	\text{solidez} &= \frac{área}{área\_convexa}
+\end{align}
+
+El factor de forma identifica qué forma tiene el objeto (\textit{i. e.} rectángulo, triángulo, círculo, etc.). La redondez identifica cómo de redondo es un objeto, siendo el objeto más redondo un círculo perfecto. La convexidad y la solidez identifican cómo de irregular es un objeto (\textit{e. g.} una televisión sería menos irregular que una estatua humana.)
+
+Para poder reconocer los colores hay varios métodos. Uno de los más utilizados es el espacio de color HSV (\textit{Hue Saturation Value}), donde se diferencian los colores en tono, saturación y brillo, como se aprecia en la figura \ref{fig:hsv}. Las imágenes o fotogramas procesados se convierten a HSV para obtener características que no se podían extraer con el espacio RGB (\textit{Red Green Blue}). Es verdaderamente útil cuando se trata de separar un objeto del fondo, y el color de este fondo es muy diferente al del objeto, como ocurre con la técnica del \textit{chroma key}, en donde los objetos se sitúan delante de un fondo normalmente verde para incorporarles un nuevo fondo diferente.
+
+\begin{figure}[h]
+	\includegraphics[width=0.5\textwidth]{hsv}
+	\centering
+	\caption[Representación del espacio de color HSV]{Representación del espacio de color HSV~\cite{wiki:hsv}.}
+	\label{fig:hsv}
+\end{figure}
+
+
 \subsection{Puntos de la mano}
 Una vez comprendidos los conceptos a la hora de procesar vídeos, viene el paso para obtener los puntos de la mano con los que extraer datos que sirvan para realizar una clasificación.
 
-Mediante el objeto de lectura, se van extrayendo todos los fotogramas para procesarlos uno a uno. En cada fotograma, se dibujarán los puntos unidos mediante líneas, tal y como se aprecia en la figura~\ref{fig:puntosmano}. Sin embargo, en este trabajo, sólo serán importantes dos de ellos: el 4 y el 8, ya que son los que representan las puntas de los dedos pulgar e índice respectivamente.
+Mediante el objeto de lectura, se van extrayendo todos los fotogramas para procesarlos uno a uno. En cada fotograma, se dibujarán los puntos unidos mediante líneas con la biblioteca \textit{mediapipe} que se explica en el apartado de técnicas y herramientas~\ref{lib:mediapipe}, tal y como se aprecia en la figura~\ref{fig:puntosmano}. Sin embargo, en este trabajo, sólo serán importantes dos de ellos: el 4 y el 8, ya que son los que representan las puntas de los dedos pulgar e índice respectivamente.
 
 \begin{figure}[h]
-	\includegraphics[width=0.9\textwidth]{puntos_mano}
+	\includegraphics[width=1\textwidth]{puntos_mano}
 	\centering
 	\caption[Puntos de la mano y su nombre.]{Puntos de la mano y su nombre~\cite{mediapipehands}.}
 	\label{fig:puntosmano}
@@ -34,10 +63,10 @@ Mediante el objeto de lectura, se van extrayendo todos los fotogramas para proce
 
 Una vez establecidos los puntos, se van a obtener las coordenadas de cada fotograma donde están ambos puntos, con el fin de obtener la distancia que los separa en cada instante.
 
-\section{Limpieza de los datos}
+\section{Limpieza de los datos} \label{limpieza}
 Dado que la obtención de los datos del paso anterior no es perfecta, hay que utilizar alguna técnica para eliminar el posible ruido que la biblioteca ha podido ocasionar. Este ruido viene dado porque entre fotogramas, la biblioteca puede detectar el dedo en lugares diferentes sin que este se haya movido, provocando que la amplitud de la pinza se vea afectada.
 
-\subsection{Filtro de Savitzky–Golay}
+\subsection{Filtro de Savitzky–Golay} \label{savgol}
 Este filtrado~\cite{wiki:savgol} ha sido utilizado para eliminar algunas imperfecciones de los datos. Se basa en el cálculo de una regresión polinomial local de grado $k$ con al menos $k+1$ puntos equiespaciados que determinan el valor de un nuevo punto. Esto hará que los datos varíen y se suavice la gráfica. 
 
 Al dibujar los datos en forma de gráfica, como se observa en la figura \ref{fig:graficadistancias}, se puede apreciar cómo algunas zonas no establecen un único máximo o el máximo podría estar exagerado, por lo que es necesario suavizar esos picos para obtener un solo máximo. 
@@ -97,6 +126,7 @@ Una de las formas más sencillas de encontrar patrones en los datos es utilizand
 	un ejemplo con ciertos valores se le asigne una clase debido a la probabilidad de aparición de sus valores.
 	\item \textbf{Naive Bayes Gaussiano:} es una variante del clasificador Naive Bayes y se trata de utilizar las probabilidades de que aparezcan los valores de, pero acorde con una distribución normal.
 	\item \textbf{SVM:} se trata de conseguir un hiperplano que separe los ejemplos que compartan la misma clase del resto. A la hora de clasificar un ejemplo, dependiendo de dónde se encuentre, se le asignará una clase u otra.
+	\item \textbf{Dummy:} es el clasificador más sencillo que existe, ya que siempre predice la clase que más veces aparezca, por lo que nunca tendrá buenas precisiones cuando los datos se encuentren equilibrados.
 \end{itemize}
 
 \section{Evaluación de los resultados}
@@ -148,7 +178,7 @@ Las medidas son formas de representar los resultados para obtener diferentes pun
 \subsection{Curva ROC}
 La curva ROC~\cite{wiki:roc} (\textit{Receiver Operating Characteristic}) es una representación gráfica utilizada para conocer la proporción de positivos bien clasificados y los positivos mal clasificados.
 
-La curva ROC representada gráficamente tiene como eje $x$ la 1-especificidad y como eje $y$ la sensibilidad. La especificidad corresponde a los ejemplos negativos bien clasificados, o lo que es lo mismo, 1 menos los ejemplos positivos mal clasificados; y la sensibilidad corresponde a los ejemplos positivos bien clasificados. Sus correspondientes fórmulas son las siguientes:
+La curva ROC representada gráficamente tiene como eje $x$ la 1 $-$ especificidad y como eje $y$ la sensibilidad. La especificidad corresponde a los ejemplos negativos bien clasificados, o lo que es lo mismo, 1 menos los ejemplos positivos mal clasificados; y la sensibilidad corresponde a los ejemplos positivos bien clasificados. Sus correspondientes fórmulas son las siguientes:
 
 \begin{align}
 	especificidad &= \frac{TN}{FP+TN} &
