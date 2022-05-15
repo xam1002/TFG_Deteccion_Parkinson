@@ -19,10 +19,10 @@ Para comprender esto mejor, se va a suponer que una distancia mínima entre los 
 Realmente, todos los puntos no están recogiendo valores reales, sin embargo, dado que sólo interesa recoger la distancia máxima, únicamente se realiza la diferencia entre máximos y mínimos.
 
 \section{Obtención de características}
-En este punto se trata de buscar otros datos que caractericen a los vídeos con el fin de poder realizar una clasificación. Habrá datos calculados y datos que ya vienen dados.
+En este punto se trata de buscar otros datos que caractericen a los vídeos con el fin de poder realizar una clasificación. Habrá datos calculados y datos que ya vienen dados porque no se pueden calcular, como la mano, la edad o el sexo.
 
 \subsection{Amplitud}
-Esta característica es la más evidente ya que, generalmente, la gente con Parkinson ven dificultad a la hora de abrir y cerrar la mano hasta su punto máximo.
+Esta característica es la más evidente ya que, generalmente, los pacientes con Parkinson ven dificultad a la hora de abrir y cerrar la mano hasta su punto máximo.
 
 Para su extracción, en primer lugar, se han recogido los máximos y mínimos de la gráfica de los 5 primeros movimientos y de los 5 últimos. Después, estos datos se normalizan para que no afecte la distancia de la mano a la cámara. Esta normalización se obtiene de la siguiente fórmula:
 
@@ -55,4 +55,4 @@ El sexo de la persona podría servir para clasificar las personas con y sin Park
 \subsection{Edad}
 De forma similar a lo que ocurre con el sexo, el Parkinson es más propenso en personas mayores, de 60 años, por lo que la edad también podría resultar interesante a la hora de clasificar.
 
-Sin embargo, hay que tener cuidado con los ejemplos a la hora de entrenar modelos, ya que el sistema podría aprender que todos los menores de, por ejemplo, 30 años nunca tendrán Parkinson, cuando esto no es cierto. Esta característica tampoco es calculada, también viene dada con el vídeo.
+Sin embargo, hay que tener cuidado con los ejemplos a la hora de entrenar modelos, ya que el sistema podría aprender que todos los menores de, por ejemplo, 30 años nunca tendrán Parkinson, cuando esto no es cierto. Esto dependerá de la muestra de entrenamiento, ya que si hay pacientes de diversas edades con Parkinson, el modelo realizará la predicción teniendo en cuenta también esos casos. Esta característica tampoco es calculada, también viene dada con el vídeo.
