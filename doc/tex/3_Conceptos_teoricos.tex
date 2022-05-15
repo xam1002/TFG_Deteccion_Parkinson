@@ -106,27 +106,20 @@ El conjunto de entrenamiento ha de contener más ejemplos que el conjunto de tes
 Es importante que a la hora de evaluar el modelo se utilicen datos que no han sido utilizados para entrenar el modelo, ya que esos ejemplos siempre los acertarían. Debido a esto, es necesario tener estas dos divisiones.
 
 \subsection{Validación cruzada}
-La validación cruzada es una técnica que se utiliza a la hora de entrenar y probar modelos de aprendizaje. Se basa en dividir el conjunto de datos en un número de partes y utilizar cada una de las partes como conjunto de test y el resto para entrenar el modelo, tal y como se aprecia en la figura \ref{fig:valcruzada}. Cada una de las partes será utilizada como conjunto de test de forma iterativa.
-
-\begin{figure}[h]
-	\includegraphics[width=1\textwidth]{validacion_cruzada}
-	\caption[Validación cruzada dividendo el conjunto de ejemplos en 4 partes.]{Validación cruzada dividendo el conjunto de ejemplos en 4 partes.\cite{wiki:valcruzada}}
-	\label{fig:valcruzada}
-\end{figure}
+La validación cruzada es una técnica que se utiliza a la hora de entrenar y probar modelos de aprendizaje. Se basa en dividir el conjunto de datos en un número de partes y utilizar cada una de las partes como conjunto de test y el resto para entrenar el modelo. Cada una de las partes será utilizada como conjunto de test de forma iterativa.
 
 Con esto se consigue que la selección de los conjuntos de entrenamiento y test no perjudique al resultado del modelo y se puedan probar más posibilidades de división de los datos.
 
-\subsection{Modelos de clasificación}
+\subsection{Algoritmos de clasificación}
 Una de las formas más sencillas de encontrar patrones en los datos es utilizando modelos de aprendizaje. Hay varios modelos, y cada uno utiliza una forma de clasificar diferente. Los modelos empleados en este TFG son:
 \begin{itemize}
-	\item \textbf{Árboles de decisión:} se trata de construir un árbol formado por nodos con condiciones y hojas con clases, para que los datos sean clasificados dependiendo de si cumplen una condición de un nodo o no.
-	\item \textbf{Random Forest:} se trata de clasificar los ejemplos utilizando varios árboles de decisión. Estos árboles se construyen utilizando un subconjunto del conjunto total de datos de entrenamiento. Cada árbol predirá una clase, y la más frecuente será la que se le asigne al atributo.
-	\item \textbf{k-Nearest Neighbors:} se trata de obtener la clase de los vecinos más cercanos al ejemplo que se trata de clasificar. En este clasificador, no hay un paso previo de entrenamiento, sino que los datos de entrenamiento serán los que contengan los k vecinos más cercanos.
-	\item \textbf{Naive Bayes:} se trata de calcular la frecuencia de aparición de los valores de cada característica para poder realizar una clasificación. Esto haría que 
-	un ejemplo con ciertos valores se le asigne una clase debido a la probabilidad de aparición de sus valores.
-	\item \textbf{Naive Bayes Gaussiano:} es una variante del clasificador Naive Bayes y se trata de utilizar las probabilidades de que aparezcan los valores de, pero acorde con una distribución normal.
-	\item \textbf{SVM:} se trata de conseguir un hiperplano que separe los ejemplos que compartan la misma clase del resto. A la hora de clasificar un ejemplo, dependiendo de dónde se encuentre, se le asignará una clase u otra.
-	\item \textbf{Dummy:} es el clasificador más sencillo que existe, ya que siempre predice la clase que más veces aparezca, por lo que nunca tendrá buenas precisiones cuando los datos se encuentren equilibrados.
+	\item \textbf{Árboles de decisión:} consisten en construir un árbol formado por nodos con condiciones y hojas con clases, para que los datos sean clasificados dependiendo de si cumplen una condición de un nodo o no.~\cite{arbol_decision}
+	\item \textbf{Random Forest:} se trata de clasificar los ejemplos utilizando varios árboles de decisión. Estos árboles se construyen utilizando un subconjunto del conjunto total de datos de entrenamiento. Cada árbol predecirá una clase, y la más frecuente será la que se le asigne al atributo.~\cite{random_forest}
+	\item \textbf{k-Nearest Neighbors:} se trata de obtener la clase de los vecinos más cercanos al ejemplo que se trata de clasificar. En este clasificador, no hay un paso previo de entrenamiento, sino que se realiza la predicción utilizando el conjunto de entrenamiento original.~\cite{knn}
+	\item \textbf{Naive Bayes:} se trata de calcular la frecuencia de aparición de los valores de cada característica para poder realizar una clasificación. Esto haría que un ejemplo con ciertos valores se le asigne una clase debido a la probabilidad de aparición de sus valores.~\cite{naive_bayes}
+	\item \textbf{Naive Bayes Gaussiano:} es una variante del clasificador Naive Bayes y se trata de utilizar las probabilidades de que aparezcan los valores de, pero acorde con una distribución normal.~\cite{naive_bayes_g}
+	\item \textbf{SVM:} se trata de conseguir un hiperplano que separe los ejemplos que compartan la misma clase del resto. A la hora de clasificar un ejemplo, dependiendo de dónde se encuentre, se le asignará una clase u otra.~\cite{svm}
+	\item \textbf{Dummy:} es el clasificador más sencillo que existe, ya que siempre predice la clase que mayoritaria, por lo que nunca tendrá buenas precisiones cuando los datos se encuentren equilibrados.~\cite{dummy}
 \end{itemize}
 
 \section{Evaluación de los resultados}
@@ -196,4 +189,4 @@ Para dibujar la curva ROC habría que recoger varios resultados de un modelo y u
 \subsection{Área bajo la curva ROC}
 El área bajo la curva ROC (\textit{Area Under the ROC Curve}) es la medida con la que conocer cómo de bien un modelo diferencia una clase de otra.
 
-Este área no es más que el cálculo de todo el área que hay debajo de la curva ROC. Los valores obtenidos estarán en el intervalo [0,1]. Los valores comprendidos entre 0 y 0.5 indican que el modelo confunde una clase con otra en su mayor parte, mientras que los valores comprendidos entre 0.5 y 1 indican que el modelo predice correctamente la mayoría de ejemplos, siendo el valor 1 la perfección. En la figura \ref{fig:roc} se aprecian tres valores AUC para cada curva, mostrando que la primera trata de un clasificador perfecto mientras que la última muestra un clasificador mucho peor.
+Este área no es más que el cálculo de todo el área que hay debajo de la curva ROC. Los valores obtenidos estarán en el intervalo [0,1]. Los valores comprendidos entre 0 y 0,5 indican que el modelo confunde una clase con otra en su mayor parte, mientras que los valores comprendidos entre 0,5 y 1 indican que el modelo predice correctamente la mayoría de ejemplos, siendo el valor 1 la perfección. En la figura \ref{fig:roc} se aprecian tres valores AUC para cada curva, mostrando que la primera trata de un clasificador perfecto mientras que la última muestra un clasificador mucho peor.
