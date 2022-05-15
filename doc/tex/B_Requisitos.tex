@@ -15,7 +15,7 @@ En esta sección, se detallan los requisitos funcionales y no funcionales de la 
 		\item \textbf{RF-1.1 Acceso:} los usuarios dados de alta podrán ingresar en la aplicación utilizando su nombre de usuario y su contraseña.
 		\item \textbf{RF-1.2 Administración:} habrá un usuario administrador con más acceso que el resto.
 	\end{itemize}
-	\item \textbf{RF-2 Gestión de usuarios:} el administrador será el único usuario capaz de añadir, modificar y eliminar usuarios.
+	\item \textbf{RF-2 Gestión de usuarios:} el administrador será el único usuario capaz de añadir, modificar y eliminar usuarios, y los usuarios sin privilegios podrán modificar únicamente su propio usuario.
 	\begin{itemize}
 		\item \textbf{RF-2.1 Añadir usuario:} se podrá registrar un usuario en la aplicación.
 		\item \textbf{RF-2.2 Modificar usuario:} se podrá modificar alguno de los datos de un usuario existente.
@@ -35,7 +35,6 @@ En esta sección, se detallan los requisitos funcionales y no funcionales de la 
 	\item \textbf{RNF-1 Usabilidad:} la aplicación tendrá una interfaz amigable para que pueda ser usada sin dificultad.
 	\item \textbf{RNF-2 Privacidad:} sólo se podrá acceder a la aplicación si el usuario está dado de alta.
 	\item \textbf{RNF-3 Seguridad:} cada usuario dispondrá de una clave que estará encriptada para no ser interceptada por terceros.
-	
 	
 \end{itemize}
 
@@ -224,7 +223,9 @@ Las redacciones de los casos de uso de los diagramas anteriores, tablas \ref{tab
 			Secuencia normal & Paso & Acción \\ \cline{2-3}
 			& 1 & \multicolumn{1}{p{8.75cm} |}{Se accede a la ventana.} \\ \cline{2-3}
 			& 2 & \multicolumn{1}{p{8.75cm} |}{El usuario sube el vídeo y los datos al servidor.} \\ \cline{2-3} 
-			& 3 & \multicolumn{1}{p{8.75cm} |}{Se muestra el resultado de la predicción.} \\ \hline
+			& 3 & \multicolumn{1}{p{8.75cm} |}{Se procesa el vídeo para extraer características.} \\ \cline{2-3} 
+			& 4 & \multicolumn{1}{p{8.75cm} |}{Se realiza la predicción con las características obtenidas junto a los datos subidos.} \\ \cline{2-3} 
+			& 5 & \multicolumn{1}{p{8.75cm} |}{Se muestra el resultado de la predicción.} \\ \hline
 			Postcondición & \multicolumn{2}{p{10cm} |}{El usuario obtiene una predicción.} \\ \hline
 			Excepciones & Paso & Acción \\ \cline{2-3}
 			& 1 & \multicolumn{1}{p{8.75cm} |}{Si no se inicia sesión, el servidor redirigirá el acceso a la ventana de inicio de sesión.} \\ \hline
