@@ -38,9 +38,9 @@ Es una biblioteca de Python utilizada para realizar operaciones matemáticas. Ta
 Es una biblioteca de Python utilizada para el análisis de datos. Mediante \textit{dataframes} se pueden recoger datos de hojas de cálculo o bases de datos, almacenarlos para ser tratados en el código y después guardarlos de nuevo.~\cite{wiki:pandas}
 
 \subsection{Mediapipe}\label{lib:mediapipe}
-Es una biblioteca de Pyhton utilizada para visión artificial. Una de las funcionalidades que tiene es la de reconocer y enumerar con puntos una mano.
+Es una biblioteca de Pyhton utilizada para visión artificial. Una de las funcionalidades que tiene es la de reconocer y enumerar con puntos una mano. La biblioteca procesa una imagen, que podría ser el fotograma de un vídeo, y detecta las manos en ella. Tras detectar las manos, identificará la posición de los dedos mediante coordenadas para poder enumerarlos. Tras esto, los puntos se conectan siguiendo unas reglas, con el fin de poder dibujar la silueta de la mano.
 \begin{itemize}
-	\item \textit{solutions.hands}: este paquete realiza el reconocimiento de la mano para asignar unos puntos. Hay 21 puntos repartidos por toda la mano, los más interesantes para este proyecto son el 4 (dedo pulgar) y el 8 (dedo índice). \cite{mediapipehands}
+	\item \textit{solutions.hands}: este paquete realiza el reconocimiento de la mano para asignar unos puntos. Hay 21 puntos repartidos por toda la mano, los más interesantes para este proyecto son el 4 (dedo pulgar) y el 8 (dedo índice). Todos los puntos vienen dados con coordenadas $x$, $y$ y $z$. Para acceder a un punto, únicamente será necesario acceder a su posición dentro de la estructura de datos que contiene todos los puntos. \cite{mediapipehands}
 	\item \textit{solutions.drawing\_utils}: este paquete es el que se encarga de dibujar los puntos y las conexiones entre ellos sobre la mano.
 \end{itemize}
 
@@ -76,4 +76,4 @@ Es una biblioteca de Python utilizada para realizar aprendizaje automático. Se 
 \end{itemize}
 
 \subsection{Joblib}
-Es una biblioteca de Python utilizada para almacenamiento en disco. Una de las funcionalidades es la de serializar objetos para almacenarlos en disco y después deserializarlos en otro archivo para poder utilizarlos.
+Es una biblioteca de Python utilizada para almacenamiento en disco. Una de las funcionalidades es la de serializar objetos para almacenarlos en disco y después deserializarlos en otro archivo para poder utilizarlos. Estos archivos tienen la extensión \textit{.pkl}, que es un archivo de Python binario. Permite realizar la serialización de forma rápida y sencilla.
