@@ -1,8 +1,38 @@
 \apendice{Documentación técnica de programación}
 
 \section{Introducción}
+En este apartado, se detalla todo aquello que es necesario saber para comprender la aplicación web desde el punto de vista de un programador. También se detalla la estructura de directorios seguida para realización del proyecto.
 
 \section{Estructura de directorios}
+Los archivos realizados durante este proyecto se han subido al repositorio de GitHub, siguiendo una estructura. La estructura es la siguiente:
+
+\begin{itemize}
+	\item \textbf{/doc:} en esta carpeta se aloja toda la documentación del proyecto realizado. Esta carpeta además tiene otras en su interior y almacena los ficheros principales de la documentación, tanto en formato \LaTeX{} como en PDF, además de las bibliografías. Las carpetas interiores son:
+		\begin{itemize}
+			\item \textbf{/img:} en esta carpeta se alojan las imágenes de la documentación.
+			\item \textbf{/tex:} en esta carpeta se alojan los ficheros de \LaTeX{} que conforman cada apartado de la memoria y los anexos.
+		\end{itemize}
+	\item \textbf{/notebooks:} en esta carpeta se alojan los archivos de Jupyter Notebook utilizados durante el desarrollo de este trabajo.
+\end{itemize}
+
+La estructura de ficheros seguida para el desarrollo de la aplicación es la siguiente:
+
+\begin{itemize}
+	\item \textbf{/impl:} esta carpeta contiene las clases de Python utilizadas en la aplicación para realizar diferentes funciones.
+	\item \textbf{/modelo:} en esta carpeta se subirá el modelo para predecir. Únicamente habrá un archivo en esta carpeta, ya que al subir un nuevo modelo, el antiguo se eliminará.
+	\item \textbf{/static:} esta carpeta contiene los archivos estáticos de la aplicación. Dentro hay otras tres carpetas, alojando cada una un tipo de archivo diferente:
+	\begin{itemize}
+		\item \textbf{/js:} esta carpeta contiene los archivos JavaScript utilizados en la aplicación web.
+		\item \textbf{/img:} esta carpeta contiene las imágenes utilizadas en la aplicación web.
+		\item \textbf{/css:} esta carpeta contiene los archivos CSS utilizados en la aplicación web.
+	\end{itemize}
+	\item \textbf{/templates:} esta carpeta contiene todos los archivos HTML de la aplicación. Alberga los archivos más generales y otras dos carpetas más, las cuales son:
+	\begin{itemize}
+		\item \textbf{/admin:} esta carpeta contiene todos los archivos HTML que tienen que ver con el usuario administrador, esto es, que sólo un usuario administrador puede ver renderizados.
+		\item \textbf{/pred:} esta carpeta contiene todos los archivos HTML que tienen que ver con la predicción.
+	\end{itemize}
+	\item \textbf{/video:} esta carpeta contiene el vídeo que se va a procesar para realizar la predicción. Una vez termine la predicción, el vídeo se borrará del servidor.
+\end{itemize}
 
 \section{Manual del programador}
 
