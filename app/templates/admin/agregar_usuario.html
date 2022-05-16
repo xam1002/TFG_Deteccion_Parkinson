@@ -1,0 +1,77 @@
+{% extends './cabecera.html' %}
+
+{% block title %}Añadir usuario{% endblock %}
+
+{% block customCSS %}
+<link href="{{ url_for('static', filename='css/agregar_modificar_usuario.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body1 %}
+<body class="bg-light">  
+<div class="container">
+<main>
+    <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Añadir usuario</h4>
+        <form class="needs-validation" novalidate action="\usuario_agregado" method="POST" enctype="multipart/form-data">
+            {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+            <br/>
+            {% for message in messages %}
+            <div class="alert alert-primary alert-dismissible" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <label for="firstName" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="nombre_completo" name="nombre_completo" placeholder="Nombre completo" value="" required>
+                    <div class="invalid-feedback">
+                        Es necesario añadir el nombre completo.
+                    </div>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="lastName" class="form-label">Nombre de usuario</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de usuario" value="" required>
+                <div class="invalid-feedback">
+                    Es necesario añadir el nombre del usuario. 
+                </div>
+            </div>
+
+            <div class="col-6">
+                <label for="username" class="form-label">Contraseña</label>
+                <div class="input-group has-validation">
+                    <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Contraseña" required>
+                <div class="invalid-feedback">
+                    Es necesario añadir una contraseña.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <label for="username" class="form-label">Confirmar contraseña</label>
+                <div class="input-group has-validation">
+                    <input type="password" class="form-control" id="confirmar_contraseña" name="confirmar_contraseña" placeholder="Confirmar contraseña" required>
+                <div class="invalid-feedback">
+                    Es necesario repetir la contraseña.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <a class="w-100 btn btn-secondary btn-lg" type="button" href="{{ url_for('gestion_usuarios') }}">Cancelar</a>
+            </div>
+            <div class="col-sm-6">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Añadir usuario</button>
+            </div>
+        </form>
+    </div>
+</main>
+</div>
+    <script src="{{ url_for('static', filename='js/agregar_usuario.js') }}"></script>
+</body>
+{% endblock %}

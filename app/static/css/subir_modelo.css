@@ -1,0 +1,15 @@
+#subida {
+    margin-top: 10%;
+    align-items: center;
+}
+
+#boton_subir {
+    margin: auto;
+    margin-top: 1%;
+    width: 120px;
+}
+
+.arrastrar button {
+    height: 50px;
+    width: 200px;
+}

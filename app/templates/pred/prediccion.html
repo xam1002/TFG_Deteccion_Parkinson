@@ -1,0 +1,26 @@
+{% extends './cabecera.html' %}
+
+{% block title %}Resultado{% endblock %}
+
+{% block customCSS %}
+{% endblock %}
+{% block body1 %}
+<div id="prediccion">
+{% if data.prediccion.1 == '0' %}
+    <h3>No tiene Parkinson</h3>
+{% elif data.prediccion.1 == '1' %}
+    <h3>Posibilidad de que tenga Parkinson</h3>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block admin%}
+{% if current_user.nombre == 'admin' %}
+
+<a class="btn btn-dark" href="{{ url_for('gestion_usuarios') }}">Gestionar usuarios</a>
+<a class="btn btn-dark" href="{{ url_for('modificar_modelo') }}">Modificar modelo</a>
+
+{% endif %}
+{% endblock %}
+{% block customJS %}
+{% endblock %}

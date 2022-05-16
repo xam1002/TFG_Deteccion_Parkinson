@@ -1,0 +1,16 @@
+{% extends './cabecera.html' %}
+
+{% block body1 %}
+<div id="prediccion">
+<h3>Modelo actualizado</h3>
+</div>
+{% endblock %}
+
+{% block admin%}
+{% if current_user.nombre == 'admin' %}
+
+<a class="btn btn-dark" href="{{ url_for('gestion_usuarios') }}">Gestionar usuarios</a>
+<a class="btn btn-dark" href="{{ url_for('modificar_modelo') }}">Modificar modelo</a>
+
+{% endif %}
+{% endblock %}

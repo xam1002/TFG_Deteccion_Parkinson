@@ -1,0 +1,32 @@
+{% extends './cabecera.html' %}
+
+{% block title %}Gestión usuarios{% endblock %}
+
+{% block customJS %}
+	<script src="{{ url_for('static', filename='js/eliminar_usuario.js') }}"></script>
+{% endblock %}
+
+{% block body1 %}
+    <ul>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Usuario</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for c in data.usuarios %}
+            <tr>
+                <th scope="row">{{ c.0 }}</th>
+                <td>
+                    <a type="button" href="modificar_usuario/{{ c.1 }}" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+                    <a name="eliminar" type="button" href="/usuario_borrado/{{ c.1 }}" onclick="confirmacion(event)" class="btn btn-danger"><i class="bi bi-x-lg"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </ul>
+<a class="btn btn-primary" href="{{ url_for('agregar_usuario') }}">Añadir usuario</a>
+{% endblock %}

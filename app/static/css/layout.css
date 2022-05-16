@@ -1,0 +1,24 @@
+#cabecera {
+    overflow:hidden;
+}
+
+#A {
+    float:right;
+    margin-right: 1%;
+ }
+
+#botones_admin {
+    align-self: center;
+}
+
+#bienvenida {
+    margin-top: 1%;
+}
+
+#prediccion {
+    margin-top: 10%;
+}
+
+#pagina_no_encontrada {
+    margin-top: 10%;
+}

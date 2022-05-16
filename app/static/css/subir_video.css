@@ -1,0 +1,29 @@
+#subida {
+    margin-top: 10%;
+}
+
+#boton_predecir {
+    margin: auto;
+    margin-top: 1%;
+    width: 120px;
+}
+
+.nombre-radio {
+    margin-right: 100%;
+}
+
+.opciones-radio {
+    margin-left: 50px;
+}
+
+#selector {
+    margin-top: 1%;
+    margin-left: 40%;
+    width: 800px;
+    display : flex;
+    flex-direction : row;
+}
+
+#sexo {
+    margin-left: 5%;
+}

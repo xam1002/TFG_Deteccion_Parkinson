@@ -1,0 +1,70 @@
+{% extends './cabecera.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/subir_video.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/arrastrar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cargando.css') }}">
+{% endblock %}
+
+{% block body1 %}
+<div id="bienvenida">
+{% block bienvenida %}
+{% endblock %}
+</div>
+<div id="contenedor_carga" style="visibility: hidden; opacity: '0'">
+    <h3>Realizando predicción...</h3><br>
+    <div id="carga"></div><br>
+    Este proceso podría tardar varios minutos.
+</div>
+{% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+    <br/>
+    {% for message in messages %}
+    <div class="alert alert-primary alert-dismissible" role="alert" style="width: 20%; margin-left: 40%;">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+<div id="subida">
+    <form id="predecir" action="\uploader" method="POST" enctype="multipart/form-data">
+        <div class="arrastrar">
+            <h2>Arrastre el vídeo para subirlo</h2>
+            <span>O</span>
+            <button type="button">Seleccione un vídeo</button>
+            <input accept="video/*" type="file" id="archivo" name="archivo" hidden multiple><br><br>
+        </div>
+        <div id="selector">
+            <div id="mano">
+                <div class="nombre-radio">
+                    Mano:
+                </div>
+                <div class="opciones-radio">
+                    <input name="mano" type="radio" value="0"> Derecha<br>
+                    <input name="mano" type="radio" value="1"> Izquieda
+                </div>
+            </div>
+            <div id="sexo">
+                <div class="nombre-radio">
+                    Sexo:
+                </div>
+                <div class="opciones-radio">
+                    <input name="sexo" type="radio" value="0"> Hombre<br>
+                    <input name="sexo" type="radio" value="1"> Mujer
+                </div>
+            </div>
+        </div>
+        <div id="boton_predecir">
+            <button id="boton_p" class="w-100 btn btn-primary btn-lg" type="submit" onclick="cargando()">Predecir</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% block customJS %}
+<script src="{{ url_for('static', filename='js/cargando.js') }}"></script>
+<script src="{{ url_for('static', filename='js/arrastrar.js') }}"></script>
+{% endblock %}

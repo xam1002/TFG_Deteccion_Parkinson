@@ -1,0 +1,24 @@
+{% extends './layout.html' %}
+{% block body %}
+<nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
+    <div class="container-fluid">
+        <div id="botones_admin">
+        {% if current_user.nombre == 'admin' %}
+            <a id="inicio" class="navbar-brand" href="{{ url_for('admin') }}">Inicio</a>
+            <a class="btn btn-dark" href="{{ url_for('gestion_usuarios') }}">Gestionar usuarios</a>
+            <a class="btn btn-dark" href="{{ url_for('modificar_modelo') }}">Modificar modelo</a>
+        {% else %}
+            <a id="inicio" class="navbar-brand" href="{{ url_for('upload') }}">Inicio</a>
+            <a class="btn btn-dark" href="{{ url_for('modificar_usuario', id=current_user.id) }}">Modificar usuario</a>
+        {% endif %}
+    </div>
+        <div id="cabecera">
+        <div id="A">
+            <a class="btn btn-dark" href="{{ url_for('logout') }}" style="width:150px">Cerrar sesión</a>
+        </div>
+        </div>
+    </div>
+</nav>
+{% block body1 %}
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends './cabecera.html' %}
+
+{% block title %}Página no encontrada {% endblock %}
+
+{% block body1 %}
+<div id="pagina_no_encontrada">
+    <h2>Ups... La página que buscas no existe</h2>
+    <img class="mb-4" src="{{ url_for('static', filename='img/pagina_no_encontrada.png') }}" alt="" width="500" height="200">
+</div>
+{% endblock %}
