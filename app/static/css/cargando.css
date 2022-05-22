@@ -7,10 +7,10 @@
 }
 
 #contenedor_carga {
+    display: none;
     background-color: white;
     height: 100%;
     width: 100%;
-    /* margin-top: 10%; */
     position: fixed;
     -webkit-transition: all 1s ease;
     -o-transition: all 1s ease;
@@ -35,4 +35,3 @@
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
-
