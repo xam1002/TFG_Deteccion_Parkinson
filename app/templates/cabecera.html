@@ -1,20 +1,30 @@
 {% extends './layout.html' %}
 {% block body %}
-<nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
+<nav id="navegacion" class="navbar navbar-dark bg-dark" aria-label="First navbar example">
     <div class="container-fluid">
         <div id="botones_admin">
+            <input id="menu_btn" type="checkbox">
+            <label id="menu_btn2" class="btn btn-dark" for="menu_btn"><i class="bi bi-list"></i></label>
         {% if current_user.nombre == 'admin' %}
             <a id="inicio" class="navbar-brand" href="{{ url_for('admin') }}">Inicio</a>
-            <a class="btn btn-dark" href="{{ url_for('gestion_usuarios') }}">Gestionar usuarios</a>
-            <a class="btn btn-dark" href="{{ url_for('modificar_modelo') }}">Modificar modelo</a>
+            <a id="btn_nav" class="btn btn-dark" href="{{ url_for('gestion_usuarios') }}">Gestionar usuarios</a>
+            <a id="btn_nav2" class="btn btn-dark" href="{{ url_for('modificar_modelo') }}">Modificar modelo</a>
+            <nav class="menu">
+                <a class="btn btn-dark" href="{{ url_for('gestion_usuarios') }}">Gestionar usuarios</a>
+                <a class="btn btn-dark" href="{{ url_for('modificar_modelo') }}">Modificar modelo</a>
+            </nav>
         {% else %}
             <a id="inicio" class="navbar-brand" href="{{ url_for('upload') }}">Inicio</a>
-            <a class="btn btn-dark" href="{{ url_for('modificar_usuario', id=current_user.id) }}">Modificar usuario</a>
+            <a id="btn_nav2" class="btn btn-dark" href="{{ url_for('modificar_usuario', id=current_user.id) }}">Modificar usuario</a>
+            <nav class="menu">
+                <a class="btn btn-dark" href="{{ url_for('modificar_usuario', id=current_user.id) }}">Modificar usuario</a>
+            </nav>
         {% endif %}
     </div>
         <div id="cabecera">
         <div id="A">
-            <a class="btn btn-dark" href="{{ url_for('logout') }}" style="width:150px">Cerrar sesión</a>
+            <a id="cerrar_sesion_txt" class="btn btn-dark" href="{{ url_for('logout') }}" style="width:150px">Cerrar sesión</a>
+            <a id="cerrar_sesion_btn" type="button" class="btn btn-dark" href="{{ url_for('logout') }}"><i class="bi bi-power"></i></a>
         </div>
         </div>
     </div>
