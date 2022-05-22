@@ -6,12 +6,42 @@
 {% endblock %}
 {% block body1 %}
 <div id="prediccion">
-{% if data.prediccion.1 == '0' %}
-    <h3>No tiene Parkinson</h3>
-{% elif data.prediccion.1 == '1' %}
+{% if data.prediccion > 0.66 %}
+    <h1>{{ data.prediccion * 100 }} %</h1>
+    <h3>Alta posibilidad de que tenga Parkinson</h3>
+{% elif data.prediccion > 0.33 %}
+    <h1>{{ data.prediccion * 100 }} %</h1>
     <h3>Posibilidad de que tenga Parkinson</h3>
+{% elif data.prediccion > 0 %}
+    <h1>{{ data.prediccion * 100 }} %</h1>
+    <h3>Baja posibilidad de que tenga Parkinson</h3>
+{% elif data.prediccion == 0 %}
+    <h3>No tiene Parkinson</h3>
 {% endif %}
+<div id="escala">
+    <div id="baja">Baja</div>
+    <div id="media">Media</div>
+    <div id="alta">Alta</div>
 </div>
+<div id="posicion">
+    {% if data.prediccion < 0.33 %}
+    <div class="flecha-pred"><i class="bi bi-caret-up-fill"></i></div>
+    <div class="flecha-pred"></div><div class="flecha-pred"></div>
+    {% elif data.prediccion < 0.66 %}
+    <div class="flecha-pred"><i class="bi bi-caret-up-fill"></i></div>
+    {% elif data.prediccion < 1 %}
+    <div class="flecha-pred"></div><div class="flecha-pred"></div>
+    <div class="flecha-pred"><i class="bi bi-caret-up-fill"></i></div>
+    {% endif %}
+</div>
+<br>Tenga en cuenta que esta predicción ha sido realizada utilizando un software de inteligencia artificial.<br>
+Para confirmar esta predicción, por favor, póngase en contacto con su médico.<br>
+</div>
+{% if current_user.nombre == 'admin' %}
+    <a id="btn_volver" class="btn btn-secondary" href="{{ url_for('admin') }}">Volver</a>
+{% else %}
+    <a id="btn_volver" class="btn btn-secondary" href="{{ url_for('upload') }}">Volver</a>
+{% endif %}
 {% endblock %}
 
 {% block admin%}
