@@ -13,7 +13,7 @@
 {% block bienvenida %}
 {% endblock %}
 </div>
-<div id="contenedor_carga" style="visibility: hidden; opacity: '0'">
+<div id="contenedor_carga">
     <h3>Realizando predicción...</h3><br>
     <div id="carga"></div><br>
     Este proceso podría tardar varios minutos.
@@ -37,6 +37,7 @@
             <span>O</span>
             <button type="button">Seleccione un vídeo</button>
             <input accept="video/*" type="file" id="archivo" name="archivo" hidden multiple><br><br>
+            <div id="btn_ayuda" title="Arrastre o seleccione un vídeo para realizar la predicción."><i class="bi bi-question-circle-fill"></i></div>
         </div>
         <div id="selector">
             <div id="mano">
