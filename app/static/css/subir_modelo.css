@@ -1,12 +1,23 @@
 #subida {
-    margin-top: 10%;
+    /* margin-top: 10%; */
+    display: flex;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 #boton_subir {
     margin: auto;
     margin-top: 1%;
     width: 120px;
+    display : flex;
+    justify-content: center;
+    flex-direction : row;
+}
+
+#boton_v, #boton_p {
+    padding: 5px;
+    width: 100px;
 }
 
 .arrastrar button {
