@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block body1 %}
-<body class="bg-light">  
-<div class="container">
+<body class="bg-light">
 <main>
+<div class="container">
     <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Añadir usuario</h4>
         <form class="needs-validation" novalidate action="\usuario_agregado" method="POST" enctype="multipart/form-data">
@@ -27,7 +27,7 @@
             {% endwith %}
             <div class="row g-3">
                 <div class="col-sm-6">
-                    <label for="firstName" class="form-label">Nombre completo</label>
+                    <label for="nombre_completo" class="form-label">Nombre completo</label>
                     <input type="text" class="form-control" id="nombre_completo" name="nombre_completo" placeholder="Nombre completo" value="" required>
                     <div class="invalid-feedback">
                         Es necesario añadir el nombre completo.
@@ -35,7 +35,7 @@
             </div>
 
             <div class="col-sm-6">
-                <label for="lastName" class="form-label">Nombre de usuario</label>
+                <label for="nombre" class="form-label">Nombre de usuario</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de usuario" value="" required>
                 <div class="invalid-feedback">
                     Es necesario añadir el nombre del usuario. 
@@ -43,7 +43,7 @@
             </div>
 
             <div class="col-6">
-                <label for="username" class="form-label">Contraseña</label>
+                <label for="contraseña" class="form-label">Contraseña</label>
                 <div class="input-group has-validation">
                     <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Contraseña" required>
                 <div class="invalid-feedback">
@@ -53,7 +53,7 @@
             </div>
 
             <div class="col-6">
-                <label for="username" class="form-label">Confirmar contraseña</label>
+                <label for="confirmar_contraseña" class="form-label">Confirmar contraseña</label>
                 <div class="input-group has-validation">
                     <input type="password" class="form-control" id="confirmar_contraseña" name="confirmar_contraseña" placeholder="Confirmar contraseña" required>
                 <div class="invalid-feedback">
@@ -70,8 +70,8 @@
             </div>
         </form>
     </div>
-</main>
 </div>
+</main>
     <script src="{{ url_for('static', filename='js/agregar_usuario.js') }}"></script>
 </body>
 {% endblock %}
