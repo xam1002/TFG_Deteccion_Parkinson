@@ -11,15 +11,13 @@ document.getElementById("boton_p").addEventListener("click", (e) => {
     }
 });
 
-
 area.querySelector("button").addEventListener("click", (e) => {
     input.click();
 });
 
 input.addEventListener("change", (e) => {
     archivo = input.files;
-    area.classList.add("activo");
-    area.classList.remove("activo");
+    area.classList.add("agregado");
     texto.textContent = "Vídeo " + archivo[0].name + " cargado";
 });
 
@@ -40,5 +38,6 @@ area.addEventListener("drop", (e) => {
     archivoArrastrado = e.dataTransfer.files;
     new FileReader().readAsDataURL(archivoArrastrado[0]);
     area.classList.remove("activo");
+    area.classList.add("agregado");
     texto.textContent = "Vídeo " + archivoArrastrado[0].name + " cargado";
 });
