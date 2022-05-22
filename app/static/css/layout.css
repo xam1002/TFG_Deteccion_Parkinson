@@ -2,6 +2,11 @@
     overflow:hidden;
 }
 
+#navegacion {
+    display: flex;
+    align-items: center;
+}
+
 #A {
     float:right;
     margin-right: 1%;
@@ -17,8 +22,113 @@
 
 #prediccion {
     margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+}
+
+#btn_volver {
+    margin-top: 2%;
+}
+
+#escala {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+    align-items: center;
+}
+
+#baja {
+    height: 30px;
+    width: 150px;
+    background-color: rgb(3, 184, 3);
+}
+
+#media {
+    height: 30px;
+    width: 150px;
+    background-color: yellow;
+}
+
+#alta {
+    height: 30px;
+    width: 150px;
+    background-color: red;
+}
+
+#posicion {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flecha-pred {
+    width: 150px;
 }
 
 #pagina_no_encontrada {
     margin-top: 10%;
+}
+
+#A #cerrar_sesion_btn {
+    display: none;
+}
+
+#menu_btn {
+    display: none;
+}
+
+#menu_btn2 {
+    display: none;
+}
+
+.menu {
+    display: none;
+}
+
+@media (max-width:600px) {
+    #A #cerrar_sesion_txt {
+        display: none;
+    }
+    #A #cerrar_sesion_btn {
+        display: block;
+    }
+
+    #menu_btn2 {
+        display: flex;
+    }
+
+    #botones_admin {
+        display: flex;
+    }
+
+    #btn_nav, #btn_nav2 {
+        display: none;
+    }
+
+    .menu {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        top: 50px;
+        left: 0;
+        background: rgba(51, 51, 51, 0.9);
+        transition: all 0.5s;
+        transform: translateX(-100%);
+    }
+
+    .menu a {
+        display: block;
+        color: #fff;
+        background-color: rgba(51, 51, 51, 0.2);
+        height: 50px;
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    #menu_btn:checked ~ .menu {
+        transform: translateX(0%);
+    }
 }
