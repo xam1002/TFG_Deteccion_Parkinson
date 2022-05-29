@@ -1,2 +1,30 @@
 \capitulo{7}{Conclusiones y Líneas de trabajo futuras}
+ En este apartado, se exponen las conclusiones obtenidas tras realizar el trabajo. Además, se comentan las posibles líneas futuras del proyecto.
  
+ \section{Conclusiones}
+ Como ya se ha comentado en el punto \ref{resultados} de la sección de aspectos relevantes, no se ha podido obtener un clasificador suficientemente bueno como para poder realizar una buena clasificación. Estos datos no han podido ser tan buenos como se esperaba debido a las limitaciones del estudio. Sin embargo, los objetivos planteados al inicio del proyecto se han podido completad en su completitud o en gran parte de ella.
+ 
+ \subsection{Objetivo de la investigación}
+ Este objetivo ha podido ser completado satisfactoriamente, ya que se ha realizado una fase de investigación sobre la inteligencia artificial, concretamente, de la visión artificial.
+ 
+ Se han podido realizar procesamientos de manos de personas tanto con Parkinson como sin Parkinson para obtener características suficientemente buenas como para identificar aquellas personas que padecen la enfermedad.
+ 
+ Además, se han trabajado con diferentes modelos para probar cómo de eficaz es cada algoritmo para realizar una correcta predicción, aunque esto se ha visto afectado por la mala calidad de los datos.
+ 
+ \subsection{Objetivo de la aplicación web}
+ Este objetivo ha podido ser completado satisfactoriamente, salvo en la parte de realizar la predicción.
+ 
+ La aplicación es totalmente funcional, ya que cuenta con varias opciones de administración, además de una pantalla amigable y sencilla para ser utilizada sin requerir conocimientos previos.
+ 
+ El mayor inconveniente ha sido las limitaciones del estudio, pues al no haberse podido obtener un buen clasificador, la aplicación web no satisface con el objetivo de realizar una predicción, ya que generalmente tenderá a predecir que la persona tiene Parkinson.
+ 
+ \section{Líneas futuras}
+ La dificultad de obtener suficientes datos para realizar el entrenamiento de modelos ha provocado que la aplicación web se haya implementado con un modelo que no es capaz de diferenciar correctamente una persona que padece Parkinson de otra que no.
+ 
+ Sin embargo, dada la sencillez para cambiar el modelo de predicción de la aplicación, pues se ha implementado una opción de configuración para poder cambiar rápidamente el modelo, como línea futura se puede proponer entrenar un mejor clasificador utilizando datos mejores para poder utilizarlo en la aplicación.
+ 
+ Además, este trabajo se ha centrado en 7 clasificadores, pero puede extenderse utilizando más clasificadores que podrían realizar mejores predicciones, teniendo en cuenta que hay otros métodos y clasificadores más complejos. Los clasificadores utilizados también se han visto afectados por los datos utilizados, ya que uno de los clasificadores que se han utilizado podría verse beneficiado si se entrenase con datos de mayor calidad. 
+ 
+ En cuanto a los datos utilizados, dadas las limitaciones de acceso a los datos, se podría realizar un estudio con un mayor número de datos de mayor calidad para poder realizar un mejor entrenamiento de clasificadores, además de un mejor equilibrio de estos. Los datos utilizados en este trabajo no estaban estandarizados, es decir, cada persona realizaba unos movimientos que podían afectar a la hora de clasificar. Por ejemplo, si todos realizasen los movimientos a la mayor velocidad que pudieran, o abriesen la pinza lo mayor posible, se conseguiría una mejor diferencia para poder obtener distinciones entre las clases, pues teóricamente una persona sana podrá realizar los movimientos con menor dificultad que una persona enferma. Si no se realiza una estandarización de los movimientos, podría ocurrir que una persona con Parkinson haga el movimiento más rápido que una persona sana, debido a que la segunda podría realizar el movimiento de forma lenta, aun pudiendo aumentar la velocidad.
+ 
+ Otra de las posibles líneas futuras podría ser obtener otras características como el ritmo o la aceleración del movimiento. Esto podría mejorar la clasificación, ya que se podría obtener un patrón que fuese más eficaz para identificar el Parkinson que las características utilizadas en este trabajo.
