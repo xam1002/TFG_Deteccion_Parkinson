@@ -23,7 +23,7 @@ class Gestion_usuarios():
         '''
         try:
             cursor=conexion.connection.cursor()
-            sql="SELECT fullname, id FROM user"
+            sql="SELECT nombre_completo, id FROM usuarios"
             cursor.execute(sql)
             return cursor.fetchall()
         except Exception as ex:
@@ -43,7 +43,7 @@ class Gestion_usuarios():
         try:
             cursor=conexion.connection.cursor()
             contraseña_hash = generate_password_hash(contraseña)
-            sql="""INSERT INTO user (id, username, password, fullname) 
+            sql="""INSERT INTO usuarios (id, usuario, contraseña, nombre_completo) 
                 VALUES ('{}', '{}', '{}', '{}');
                 """.format(Usuario.obtener_id(conexion), nombre, contraseña_hash, nombre_completo)
             cursor.execute(sql)
@@ -65,7 +65,7 @@ class Gestion_usuarios():
         '''
         try:
             cursor=conexion.connection.cursor()
-            sql="SELECT fullname, username FROM user WHERE id = '{}'".format(id)
+            sql="SELECT nombre_completo, usuario FROM usuarios WHERE id = '{}'".format(id)
             cursor.execute(sql)
             return cursor.fetchall()[0]
         except Exception as ex:
@@ -86,9 +86,19 @@ class Gestion_usuarios():
         try:
             cursor=conexion.connection.cursor()
             contraseña_hash = generate_password_hash(contraseña)
-            sql="""UPDATE user SET username='{}', password='{}', fullname='{}' 
+            sql="""UPDATE usuarios SET usuario='{}', contraseña='{}', nombre_completo='{}' 
                 WHERE id = '{}'""".format(nombre, contraseña_hash, nombre_completo, id)
             cursor.execute(sql)
             conexion.connection.commit()
         except Exception as ex:
             raise Exception(ex)
+
+    @classmethod
+    def eliminar_usuario(self, conexion, id):
+        try:
+            cursor=conexion.connection.cursor()
+            sql="""DELETE FROM usuarios WHERE id = '{}'""".format(id)
+            cursor.execute(sql)
+            conexion.connection.commit()
+        except Exception as ex:
+            raise ex
