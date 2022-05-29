@@ -205,13 +205,7 @@ def usuario_borrado(id):
     '''
     if current_user.nombre == 'admin':
         if request.method == 'GET':
-            try:
-                cursor=conexion.connection.cursor()
-                sql="""DELETE FROM user WHERE id = '{}'""".format(id)
-                cursor.execute(sql)
-                conexion.connection.commit()
-            except Exception as ex:
-                raise ex
+            Gestion_usuarios.eliminar_usuario(conexion, id)
         return redirect(url_for('gestion_usuarios'))
     return redirect(url_for('upload'))
 
@@ -269,7 +263,7 @@ def uploader():
                 return redirect(url_for('admin'))
             return redirect(url_for('upload'))
 
-    return render_template('pred/prediccion.html', data = {'prediccion': str(prediccion)})
+    return render_template('pred/prediccion.html', data = {'prediccion': round(prediccion[0][1], 4)})
 
 @app.route('/modificar_modelo')
 @login_required
