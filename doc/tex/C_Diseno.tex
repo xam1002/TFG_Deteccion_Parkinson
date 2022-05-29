@@ -4,6 +4,18 @@
 En esta sección se detallan los aspectos más importantes de la aplicación: los datos utilizados, los procedimientos de la aplicación, la arquitectura de la aplicación y el diseño de las interfaces.
 
 \section{Diseño de datos}
+Los datos utilizados para el desarrollo de la aplicación no quedan más allá del almacenamiento de los usuarios en una base de datos y el procesamiento del vídeo.
+
+Dado que la aplicación desarrollada cuenta con alta, modificación y baja de usuarios, así como la obligación de estar dado de alta para utilizar la aplicación, esta debe estar conectada con una base de datos para almacenar los datos de los usuarios. La base de datos cuenta con una única tabla donde se almacena la información de los usuarios agregados, siguiendo la siguiente estructura de columnas:
+
+\begin{itemize}
+	\item \textbf{id:} es el identificador único del usuario. En la base de datos es una clave primaria.
+	\item \textbf{usuario:} es el nombre de usuario que se utilizará para iniciar sesión. Debe ser único para cada usuario, por lo que en la base de datos es un UNIQUE.
+	\item \textbf{contraseña:} es la contraseña utilizada para iniciar sesión junto al usuario correspondiente. Dado que la contraseña debe ser secreta, en la base de datos se guarda encriptada.
+	\item \textbf{nombre\_completo:} es el nombre completo del usuario. Su utilidad es dar la bienvenida al usuario que inicie sesión en la aplicación.
+\end{itemize}
+
+Para realizar la predicción, se debe procesar el vídeo subido al servidor. Los datos obtenidos para predecir son los mismos que se utilizaron en la fase de investigación. Estos son: las amplitudes normalizadas, la velocidad media, la mano y el sexo. Una vez obtenidas las características, se utilizan en el modelo entrenado previamente para realizar la predicción.
 
 \section{Diseño procedimental}
 
