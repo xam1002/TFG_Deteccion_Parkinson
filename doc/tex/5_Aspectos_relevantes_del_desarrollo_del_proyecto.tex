@@ -56,3 +56,102 @@ El sexo de la persona podría servir para clasificar las personas con y sin Park
 De forma similar a lo que ocurre con el sexo, el Parkinson es más propenso en personas mayores, de 60 años, por lo que la edad también podría resultar interesante a la hora de clasificar.
 
 Sin embargo, hay que tener cuidado con los ejemplos a la hora de entrenar modelos, ya que el sistema podría aprender que todos los menores de, por ejemplo, 30 años nunca tendrán Parkinson, cuando esto no es cierto. Esto dependerá de la muestra de entrenamiento, ya que si hay pacientes de diversas edades con Parkinson, el modelo realizará la predicción teniendo en cuenta también esos casos. Esta característica tampoco es calculada, también viene dada con el vídeo.
+
+\section{Resultados} \label{resultados}
+Dado que el conjunto de datos utilizado para entrenar el modelo no está equilibrado, los resultados no son realmente buenos. Este conjunto de datos no cuenta con demasiados ejemplos de personas sin Parkinson, por lo que el clasificador no es capaz de distinguir correctamente a dos pacientes con y sin Parkinson.
+
+Sin embargo, se ha realizado un estudio de los resultados, utilizando las métricas ya explicadas en el apartado \ref{medidas} para conocer cuál es el clasificador que mejor predice. Además, también se ha realizado un estudio de tiempos, para conocer cuál es el clasificador más rápido.
+
+\subsection{Predicción}
+Para realizar la predicción, se han utilizado los clasificadores ya explicados en el apartado \ref{clasificadores}, donde cada columna se corresponde a las siglas de cada clasificador. Se han descartado algunas de las características obtenidas como las amplitudes sin normalizar, la edad o el tiempo ya que empeoraban la clasificación. Además, se ha utilizado una validación cruzada de 2 divisiones y 5 repeticiones, obteniéndose los siguientes resultados:
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{| c | c | c | c | c | c | c | c |}
+			\hline
+			Medidas & RF & k-NN & AD & NBG & SVM & NB & Dummy \\ \hline
+			accuracy & 0,775 & 0,8 & 0,712 & 0,719 & 0,812 & 0,812 & 0,812 \\
+			Matt. corr. coeff. & -0,001 & -0,025 & 0,048 & -0,045 & 0 & 0 & 0 \\ 
+			f1 & 0,87 & 0,889 & 0,821 & 0,824 & 0,897 & 0,897 & 0,897 \\
+			ROC AUC & 0,59 & 0,429 & 0,528 & 0,494 & 0,367 & 0,29 & 0,5 \\
+			g mean & 0,109 & 0 & 0,295 & 0,098 & 0 & 0 & 0 \\ \hline
+		\end{tabular}
+		\caption{Tabla con las medidas y clasificadores utilizados.}
+		\label{tab:medidas}
+	\end{center}
+\end{table}
+
+Lo más destacable de estos resultados es el área bajo la curva ROC (\textit{ROC AUC}). Si bien la precisión (\textit{accuracy}) podría ser interesante, en este caso el valor resulta engañoso. Esto se debe a que algunas de estas precisiones realizan una clasificación de la clase mayoritaria, que es Parkinson sí. Dado que el conjunto de datos contiene 6 personas sin Parkinson y 26 con Parkinson, se obtiene una precisión del 0,821 si se realiza una predicción de todo sí:
+
+\begin{equation}
+	accuracy = \frac{26 + 0}{26 + 0 + 6 + 0} = 0,8125
+\end{equation}
+
+Por esta razón, aunque la mejor precisión sea 0,8125, no se debe considerar como buena, ya que no realizará bien la clasificación cuando se procese un vídeo de una persona sin Parkinson.
+
+El área bajo la curva ROC sí que muestra más información. Por ejemplo, el mejor clasificador en cuanto a este criterio es el Random Forest, con un 0,59, que indica que confunde muchos ejemplos, pero algunos pocos los acierta. También es bastante interesante el resultado que aparece en el clasificador Bayesiano Naive, ya que, pese a ser el peor valor de todos, es decir, 0,29, esto indica que en gran parte confunde los ejemplos de una clase con otra. Si este clasificador se utilizase a la inversa, esto es, cuando prediga sí decir que es no y viceversa, tendría un valor de 0,71 ($1 - 0,29$), que es un valor bastante bueno.
+
+\subsection{Tiempos de entrenamiento}
+Se ha realizado un estudio de los tiempos que tardan en entrenar los modelos. Para ello, se han realizado 10 ejecuciones con cada modelo para conocer una aproximación del tiempo que tardan en entrenar, donde se han obtenido los siguientes resultados en segundos:
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{| c | c | c | c | c | c | c | c |}
+			\hline
+			Ejecuciones & RF & k-NN & AD & NBG & SVM & NB & Dummy \\ \hline
+			1 & 0,32934 & 0,00397 & 0,00347 & 0,00294 & 0,005 & 0,00505 & 0,00046 \\
+			2 & 0,33381 & 0,00391 & 0,00297 & 0,00347 & 0,00561 & 0,00449 & 0 \\ 
+			3 & 0,28417 & 0,00319 & 0,00198 & 0,00347 & 0,00546 & 0,00496 & 0,0006 \\
+			4 & 0,32095 & 0,00362 & 0,00347 & 0,00347 & 0,00493 & 0,00534 & 0 \\
+			5 & 0,26536 & 0,00248 & 0,00198 & 0,00542 & 0,00592 & 0,00496 & 0,0005 \\
+			6 & 0,32885 & 0,00149 & 0,00294 & 0,00347 & 0,00545 & 0,00465 & 0 \\
+			7 & 0,33331 & 0,00248 & 0,00397 & 0,00298 & 0,00552 & 0,00493 & 0,0005 \\
+			8 & 0,32438 & 0,00248 & 0,00298 & 0,00397 & 0,00397 & 0,00496 & 0 \\
+			9 & 0,245 & 0,00199 & 0,00252 & 0,00446 & 0,00455 & 0,00298 & 0,0005 \\
+			10 & 0,28023 & 0,00244 & 0,00296 & 0,00447 & 0,00528 & 0,00308 & 0,0005 \\ \hline
+			Total & 3,0454 & 0,02805 & 0,02924 & 0,03812 & 0,05169 & 0,0454 & 0,00306 \\ \hline
+		\end{tabular}
+		\caption{Tabla con los tiempos de entrenamiento de cada modelo con las 10 ejecuciones.}
+		\label{tab:tiempos_entrenamiento}
+	\end{center}
+\end{table}
+
+Viendo los resultados, se puede observar que el clasificador que más destaca frente al resto es el Random Forest. Esto se debe a cómo se construye el clasificador. Dado que Random Forest es un \textit{ensemble}, es decir, que está formado por varios clasificadores, en este caso, árboles de decisión, tiene que realizar la construcción de cada árbol de decisión para construir el clasificador completo. 
+
+En la otra parte está el clasificador Dummy. Como ya se ha comentado, este clasificador realiza una predicción de la clase mayoritaria, es decir, no necesita tomar decisiones internas sobre qué clase asignar a la instancia que se está clasificando, por lo que no requiere apenas tiempo para construir el clasificador.
+
+\subsection{Tiempos de predicción}
+También se ha realizado un estudio de los tiempos que tardan en predecir los modelos. Al igual que sucedía con el estudio anterior, se han realizado 10 ejecuciones con cada modelo para conocer una aproximación del tiempo que tardan en predecir, donde se han obtenido los siguientes resultados:
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{| c | c | c | c | c | c | c | c |}
+			\hline
+			Ejecuciones & RF & k-NN & AD & NBG & SVM & NB & Dummy \\ \hline
+			1 & 0,02381 & 0,00502 & 0,00149 & 0,00301 & 0,00397 & 0,00285 & 0,00053 \\
+			2 & 0,03476 & 0,00524 & 0,00099 & 0,00244 & 0,00328 & 0,00347 & 0,00099 \\ 
+			3 & 0,01885 & 0,00496 & 0,00251 & 0,00347 & 0,00351 & 0,00344 & 0,00035 \\
+			4 & 0,02328 & 0,00333 & 0,00249 & 0,00302 & 0,00405 & 0,00313 & 0,0005 \\
+			5 & 0,02083 & 0,00248 & 0,00199 & 0,00347 & 0,00343 & 0,00343 & 0,0005 \\
+			6 & 0,03274 & 0,00198 & 0,00149 & 0,00248 & 0,00397 & 0,00332 & 0,0005 \\
+			7 & 0,03026 & 0,00397 & 0,00198 & 0,00248 & 0,00341 & 0,00347 & 0,0005 \\
+			8 & 0,01891 & 0,00347 & 0,00198 & 0,00347 & 0,00298 & 0.00248 & 0,0005 \\
+			9 & 0,02527 & 0,00351 & 0,00198 & 0,00297 & 0,00338 & 0,00198 & 0,0005 \\
+			10 & 0,03274 & 0,00347 & 0,0015 & 0,00347 & 0,00368 & 0,00341 & 0,0005 \\ \hline
+			Total & 0,26145 & 0,03743 & 0,0184 & 0,03028 & 0,03566 & 0,03098 & 0,000537 \\ \hline
+		\end{tabular}
+		\caption{Tabla con las medidas y clasificadores utilizados.}
+		\label{tab:tiempos_pred}
+	\end{center}
+\end{table}
+ 
+ Nuevamente, el clasificador Random Forest lidera la tabla de tiempos, con mucha diferencia del segundo. Esto se debe por la misma razón que en el entrenamiento, es decir, que se trata de un \textit{ensemble}, pues debe realizar varias predicciones con varios árboles de decisión para poder obtener la mejor. Sin embargo, este valor es muy inferior al anterior, ya que en general, los clasificadores tardan más en construirse que en realizar la predicción. 
+ 
+ Además, vuelve a destacar el clasificador Dummy, con un valor total todavía más bajo que en el entrenamiento. El tiempo que tarda en clasificar es prácticamente insignificante, ya que la única tardanza que tiene es la de asignar a cada instancia la clase mayoritaria.
+ 
+ \subsection{Aplicación web}
+Uno de los objetivos propuestos en este trabajo es el de realizar una aplicación web para poder predecir si, dado un vídeo de una mano de una persona, esa persona tiene Parkinson o no. Sin embargo, como se ha explicado en puntos anteriores, esta predicción no va a poder ser realizada de forma correcta, debido a que el conjunto de datos es demasiado malo como para poder entrenar un clasificador capaz de diferenciar de forma aceptable una mano con Parkinson de una que no.
+
+En los resultados de la predicción, se ha destacado el área bajo la curva del clasificador Random Forest, que era superior a la del resto de los clasificadores. Por esta razón, se ha optado por utilizar este clasificador para realizar las predicciones en la aplicación web. No obstante, este modelo puede ser cambiado por el administrador en cualquier momento.
+
+Dado que el software realizado es una aplicación web, este puede ser utilizado desde dispositivos móviles. Por esta razón, se ha implementado una interfaz diferente para pantallas menores a una anchura, por lo que el menú será más cómodo de utilizar en dispositivos de pantallas pequeñas.
