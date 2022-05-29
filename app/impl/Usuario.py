@@ -50,8 +50,8 @@ class Usuario(UserMixin):
         '''
         try:
             cursor=conexion.connection.cursor()
-            sql="""SELECT id, username, password, fullname FROM user 
-                    WHERE username = '{}'""".format(usuario.nombre)
+            sql="""SELECT id, usuario, contraseña, nombre_completo FROM usuarios 
+                    WHERE usuario = '{}'""".format(usuario.nombre)
             cursor.execute(sql)
             row = cursor.fetchone()
             if row != None:
@@ -74,7 +74,7 @@ class Usuario(UserMixin):
         '''
         try:
             cursor=conexion.connection.cursor()
-            sql="SELECT id, username, fullname FROM user WHERE id = '{}'".format(id)
+            sql="SELECT id, usuario, nombre_completo FROM usuarios WHERE id = '{}'".format(id)
             cursor.execute(sql)
             row = cursor.fetchone()
             if row != None:
@@ -97,7 +97,7 @@ class Usuario(UserMixin):
         try:
             i = 0
             cursor=conexion.connection.cursor()
-            sql="""SELECT id FROM user ORDER BY id ASC"""
+            sql="""SELECT id FROM usuarios ORDER BY id ASC"""
             cursor.execute(sql)
             row = cursor.fetchone()
             while row is not None and row[0] == i:
@@ -123,9 +123,9 @@ class Usuario(UserMixin):
         try:
             cursor=conexion.connection.cursor()
             if id == -1:
-                sql="""SELECT username FROM user WHERE username = '{}'""".format(nombre)
+                sql="""SELECT usuario FROM usuarios WHERE usuario = '{}'""".format(nombre)
             else:
-                sql="""SELECT username FROM user WHERE id != '{}' AND username = '{}'""".format(id, nombre)
+                sql="""SELECT usuario FROM usuarios WHERE id != '{}' AND usuario = '{}'""".format(id, nombre)
             cursor.execute(sql)
             return cursor.fetchone() != None
         except Exception as ex:
