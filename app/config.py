@@ -5,10 +5,11 @@ class Config:
 class DevelopmentConfing(Config):
     DEBUG = True
     DEBUG_PROCESADO = True
+    HOST = 'localhost'
     MYSQL_HOST = 'localhost'
     MYSQL_USER = 'root'
     MYSQL_PASSWORD = '123456'
-    MYSQL_DB = 'flask_login'
+    MYSQL_DB = 'flask_bd'
     CARPETA_VIDEOS = '..//Flask//app//video'
     CARPETA_MODELOS = '..//Flask//app//modelo'
 
