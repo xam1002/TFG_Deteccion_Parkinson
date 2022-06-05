@@ -4,7 +4,7 @@
 En este apartado, se detalla todo aquello que es necesario saber para comprender la aplicación web desde el punto de vista de un programador. También se detalla la estructura de directorios seguida para realización del proyecto.
 
 \section{Estructura de directorios}
-Los archivos realizados durante este proyecto se han subido al repositorio de GitHub, siguiendo una estructura. La estructura es la siguiente:
+Los archivos realizados durante este proyecto se han subido al repositorio de \href{https://github.com/xam1002/TFG_Deteccion_Parkinson}{GitHub}, siguiendo una estructura. La estructura es la siguiente:
 
 \begin{itemize}
 	\item \textbf{/doc:} en esta carpeta se aloja toda la documentación del proyecto realizado. Esta carpeta además tiene otras en su interior y almacena los ficheros principales de la documentación, tanto en formato \LaTeX{} como en PDF, además de las bibliografías. Las carpetas interiores son:
@@ -35,7 +35,86 @@ La estructura de ficheros seguida para el desarrollo de la aplicación es la sig
 \end{itemize}
 
 \section{Manual del programador}
+En este apartado se detallan las aplicaciones necesarias desde el punto de vista de un programador.
+
+\subsection{Base de datos MySQL}
+En este proyecto se ha utilizado una base de datos MySQL utilizando XAMPP, aunque puede ser utilizada una base de datos MySQL sin necesidad de utilizar XAMPP. El nombre de la base de datos, así como el usuario y la contraseña de esta deben ser especificados en el fichero \textit{config.py}, concretamente en las variables \textit{MYSQL\_HOST} para el \textit{host} de la base de datos, que generalmente será \textit{localhost}; \textit{MYSQL\_USER} y \textit{MYSQL\_PASSWORD} para el nombre de usuario de la base de datos y la contraseña, respectivamente y \textit{MYSQL\_DB} para el nombre de la base de datos.
+
+\subsection{Servidor en local}
+Dado que se trata de un servidor, para conectarse desde otro equipo como cliente es necesario establecer una dirección IP al servidor y además, estar conectado a la misma red que el servidor. Si el cliente no está conectado a la misma red que el servidor, entonces será necesario abrir los puertos del \textit{router} para que el servidor sea alcanzable desde el exterior. Como las direcciones IP de los equipos pueden variar, lo mejor será establecer en un principio el servidor como local, es decir, utilizando la dirección IP local del equipo, la 127.0.0.1, para no complicar la instalación.
 
 \section{Compilación, instalación y ejecución del proyecto}
+En este apartado se explica cómo se compila, se instala y se ejecuta el \textit{software} desarrollado.
+
+\subsection{Instalación}
+Para instalar el proyecto, se han de seguir los siguientes pasos:
+
+\begin{enumerate}
+	\item Acceder al repositorio de \href{https://github.com/xam1002/TFG_Deteccion_Parkinson}{GitHub} y descargar el archivo ZIP mediante la opción ``Code'' > ``Download ZIP''.
+	\item Descomprimir el archivo en el lugar deseado para trabajar.
+	\item Iniciar la consola en el directorio \textit{app} y ejecutar el comando \texttt{pip install -r requirements.txt} para instalar las bibliotecas de la aplicación. Es importante tener instalada al menos la versión 3.9.7 de Python para no tener incompatibilidades.
+	\item Importar el fichero \textit{flask\_bd} en una base de datos MySQL con nombre \textit{flask\_bd}.
+\end{enumerate}
+
+\subsection{Compilación}
+Al tratarse de código Python, este no necesita compilarse de forma manual. Todos los cambios realizados en el código aparecerán una vez se reinicie el servidor, y si está el modo \textit{debug} activado, no será necesario reiniciar y los cambios se producirán al guardar el fichero.
+
+\subsection{Ejecución}
+Para iniciar la aplicación, es necesario tener en cuenta lo siguiente:
+
+\begin{itemize}
+	\item Arrancar la base de datos.
+	\item Iniciar la aplicación desde la consola utilizando el comando \texttt{py app.py} desde el directorio \textit{app}.
+\end{itemize}
 
 \section{Pruebas del sistema}
+En este apartado se explican aquellas pruebas realizadas para comprobar el correcto funcionamiento de la aplicación. Dada la sencillez de la aplicación, no se han realizado pruebas automatizadas, sino que se han realizado manualmente.
+
+\subsection{Redirecciones}
+Dado que es necesario que un usuario esté dado de alta en la aplicación, un cliente únicamente podrá acceder a la pantalla de inicio de sesión. Una vez iniciada la sesión, si este usuario no es el administrador, tampoco podrá acceder a las pantallas del administrador. Al tratarse de una aplicación web, los clientes podrían acceder a las diferentes pantallas de la aplicación utilizando la barra de direcciones y escribiendo manualmente la dirección. La tabla \ref{tab:redirecciones} muestra las direcciones posibles de la página web y la redirección dependiendo de los privilegios.
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ l c c c }
+			\toprule
+			\textbf{Dirección} & \textbf{Sin usuario} & \textbf{Usuario} & \textbf{Administrador} \\ \midrule
+			\textit{/} & \textit{/login} & \textit{/login} & \textit{/login} \\
+			\textit{/login} & \textit{/login} & \textit{/login} & \textit{/login} \\ 
+			\textit{/logout} & \textit{/login} & \textit{/login} & \textit{/login} \\
+			\textit{/gestion\_usuarios} & \textit{/login} & \textit{/upload} & \textit{/gestion\_usuarios} \\ 
+			\textit{/agregar\_usuario} & \textit{/login} & \textit{/upload} & \textit{/agregar\_usuario} \\ 
+			\textit{/usuario\_agregado} & \textit{/login} & \textit{/upload} & \textit{/admin} \\
+			\textit{/modificar\_usuario/\#} & \textit{/login} & \textit{/modificar\_usuario/\#} & \textit{/modificar\_usuario/\#} \\
+			\textit{/usuario\_modificado/\#} & \textit{/login} & \textit{/upload} & \textit{/gestion\_usuarios} \\ 
+			\textit{/usuario\_borrado/\#} & \textit{/login} & \textit{/upload} & \textit{/gestion\_usuarios} \\
+			\textit{/upload} & \textit{/login} & \textit{/upload} & \textit{/upload} \\
+			\textit{/admin} & \textit{/login} & \textit{/upload} & \textit{/admin} \\
+			\textit{/uploader} & \textit{/login} & \textit{/upload} & \textit{/admin} \\
+			\textit{/modificar\_modelo} & \textit{/login} & \textit{/upload} & \textit{/modificar\_modelo} \\ 
+			\textit{/subida\_modelo} & \textit{/login} & \textit{/upload} & \textit{/admin} \\
+			Cualquier otra ruta & \textit{/login} & \textit{404.html} & \textit{404.html} \\ \bottomrule
+\end{tabular}
+		\caption{Tabla con las redirecciones dependiendo del usuario.}
+		\label{tab:redirecciones}
+	\end{center}
+\end{table}
+
+Aquellas direcciones de la tabla que tengan el símbolo \# quiere decir que la dirección contiene justo después un valor numérico. En caso de utilizar esa misma dirección sin ese valor numérico o reemplazando el símbolo \# por un valor no numérico, aparecería la plantilla \textit{404.html} renderizada.
+
+\subsection{Base de datos}
+La base de datos cuenta con una clave primaria y una clave única, tal y como se comentó en el apartado \ref{datos} de este documento. Por este motivo, se contemplan aquellas consultas que no cumplan las restricciones, por ejemplo, si se repite el ID o si se repite el nombre de usuario.
+
+El ID no puede repetirse ya que cada vez que se asigna un nuevo ID a un usuario creado, se obtiene el ID más bajo disponible. Sin embargo, dado que el nombre de usuario puede ser introducido a mano, aparecerá un mensaje advirtiendo al cliente que no puede utilizar ese nombre, ya que está en uso. Este mensaje de error aparecerá tanto en la opción de añadir usuario como en la de modificar usuario.
+
+En el inicio de sesión, cuando el cliente introduzca el usuario y la contraseña, ambos serán comprobados en la base de datos. Si el usuario no existe, aparecerá un mensaje indicando al cliente que el usuario introducido es incorrecto. Si la contraseña no coincide con la almacenada en la base de datos para el usuario introducido, aparecerá un mensaje indicando que la contraseña es incorrecta.
+
+\subsection{Campos vacíos o incorrectos}
+En varias pantallas de la aplicación es necesario rellenar campos o subir ficheros para poder realizar correctamente la tarea que se pretende. Si no se rellenan los campos del inicio de sesión, se mostrará un mensaje indicando que ese usuario no es correcto.
+
+Si no se selecciona ningún vídeo en la pantalla principal, se mostrará un mensaje de que es necesario rellenar los campos. Si sólo se rellenan los campos mano y sexo, aparecerá un mensaje indicando al cliente que el vídeo no es correcto. Si se sube un fichero con una extensión incorrecta, se mostrará el mismo mensaje.
+
+De forma muy similar ocurre al actualizar el modelo. Tanto si no se ha seleccionado ningún modelo como si el fichero es incorrecto, aparecerá un mensaje avisando de que el archivo no es válido.
+
+Por otro lado, si al añadir o modificar un usuario, no se rellenan todos los campos, se avisará al cliente indicando los campos que faltan por rellenar.
+
+Finalmente, para confirmar la contraseña introducida en el alta o modificación de un usuario, es necesario introducirla de nuevo. Si ambas no coinciden, no le permitirá al usuario continuar con la operación y le indicará mediante un aviso que las contraseñas no coinciden.
