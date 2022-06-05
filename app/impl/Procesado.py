@@ -1,4 +1,3 @@
-from shutil import ExecError
 from tqdm import tqdm
 import cv2
 import scipy.signal
@@ -12,8 +11,20 @@ mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
 
 class Procesado:
+    '''
+    Implemeta las funciones para realizar la predicción.
+    '''
 
     def obtener_numero_fotogramas(vd):
+        '''
+        Devuelve el número de fotogramas del vídeo dado por parámetro.
+
+        Parámetros:
+        - vd: vídeo del que obtener el número de fotograma.
+
+        Retorno:
+        - Número de fotogramas.
+        '''
         vc = cv2.VideoCapture(vd)
         i = 0
         if (vc.isOpened()==False):
@@ -25,7 +36,16 @@ class Procesado:
                 i+=1
         return i
     
-    def frameVideo(vd):
+    def frame_video(vd):
+        '''
+        Se obtienen los fotogramas de uno en uno del vídeo pasado por parámetro.
+
+        Parámetros:
+        - vd: vídeo del que obtener los fotogramas.
+        
+        Retorno:
+        - frame: fotograma actual del vídeo.
+        '''
         vc = cv2.VideoCapture(vd)
 
         if (vc.isOpened()==False):
@@ -38,7 +58,19 @@ class Procesado:
                 else:
                     vc.release()
 
-    def frameMano(self, frame, static=True,max_num_hands=1,min_detection_confidence=0):
+    def frame_mano(self, frame, static=True, max_num_hands=1, min_detection_confidence=0):
+        '''
+        Se marcan los puntos de la mano del fotograma pasado por parámetro.
+
+        Parámetros:
+        - frame: fotograma con la mano en donde indicar los puntos.
+        - static: modo de imagen estático. Por defecto: True.
+        - max_num_hands: número máximo de manos. Por defecto: 1.
+        - min_detection_confidence: mímina detección de confianza. Por defecto: 0.
+        
+        Retorno:
+        - Los puntos de la mano si existen, si no retorna None.
+        '''
         with mp_hands.Hands(static_image_mode=static,max_num_hands=max_num_hands, min_detection_confidence=min_detection_confidence) as hands:
             results = hands.process(cv2.flip(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB), 1))
             annotated_frame = cv2.flip(frame.copy(), 1)
@@ -51,7 +83,16 @@ class Procesado:
             
             return results.multi_hand_landmarks
     
-    def calcularDistancia(mano):
+    def calcular_distancia(mano):
+        '''
+        Se calcula la distancia entre el punto del dedo índice y el punto del dedo pulgar.
+
+        Parámetros:
+        - mano: lista con los puntos de la mano.
+        
+        Retorno:
+        - La distancia entre los puntos si las coordenadas son positivas, si no devuelve None.
+        '''
         x4=mano[0].landmark[4].x
         y4=mano[0].landmark[4].y
         x8=mano[0].landmark[8].x
@@ -65,32 +106,61 @@ class Procesado:
         
         return np.linalg.norm(p4-p8)
     
-    def calcularDistanciasVideo(self, manos):
+    def calcular_distancias_video(self, manos):
+        '''
+        Se calcula la distancia de todos los puntos de los dedos índice y pulgar 
+        de la mano pasados por parámetro.
+
+        Parámetros:
+        - manos: estructura con los puntos de la mano.
+        
+        Retorno:
+        - La lista de las distancias de los puntos de la mano.
+        '''
         dist = []
         for i in manos:
             if i is not None:
-                dist.append(self.calcularDistancia(i))
+                dist.append(self.calcular_distancia(i))
             
         return dist
 
-    def analizarVideo(self, ruta, debug = False):
+    def analizar_video(self, ruta, debug = False):
+        '''
+        Se obtienen la gráfica de las distancias obtenidas utilizando un filtrado Savitzky-Golay.
+
+        Parámetros:
+        - ruta: lugar donde se encuentra el vídeo.
+        - debug: posibilidad de mostrar por la pantalla una barra de carga del procesado. Por defecto: False.
+        
+        Retorno:
+        - La lista de las distancias del dedo índice al dedo pulgar con el filtrado. 
+        '''
         manos=[]
         if debug:
             num = self.obtener_numero_fotogramas(ruta)
             carga = tqdm(total = num, position = 0, leave = False)
-        for k, i in enumerate(self.frameVideo(ruta)):
-            manos.append(self.frameMano(self, i))
+        for k, i in enumerate(self.frame_video(ruta)):
+            manos.append(self.frame_mano(self, i))
             if debug:
                 carga.set_description("Procesando fotogramas...".format(k))
                 carga.update(1)
         if debug:
             carga.close() 
-        dist = self.calcularDistanciasVideo(self, manos)
+        dist = self.calcular_distancias_video(self, manos)
         dist = scipy.signal.savgol_filter(dist, 3, 1)
 
         return dist
     
     def obtener_amplitudes(self, datos):
+        '''
+        Se obtienen las amplitudes de los datos pasados por parámetro.
+
+        Parámetros:
+        - datos: datos de las distancias de las que sacar las amplitudes.
+        
+        Retorno:
+        - Los máximos y mínimos de cada movimiento.
+        '''
         maximos=[]
         minimos=[]
         salir = False
@@ -125,6 +195,16 @@ class Procesado:
         return maximos, minimos
       
     def obtener_tiempos(datos, maximos, minimos):
+        '''
+        Se calculan los tiempos entre un mínimo y el siguiente máximo.
+
+        Parámetros:
+        - maximos: puntos máximos del movimiento realizado en el vídeo.
+        - minimos: puntos minimos del movimiento realizado en el vídeo.
+
+        Retorno:
+        - Diferencia entre cada mínimo y máximo.
+        '''
         mini = []
         maxi = []
         for a in range(10):
@@ -138,6 +218,16 @@ class Procesado:
         return resta
 
     def obtener_velocidades(diferencias, tiempos):
+        '''
+        Se calculan las velocidades entre un mínimo y el siguiente máximo.
+
+        Parámetros:
+        - diferencias: amplitudes máximas del movimiento realizado.
+        - tiempos: tiempos que tarda cada movimiento en obtener la amplitud máxima.
+
+        Retorno:
+        - Diferencia entre cada mínimo y máximo.
+        '''
         velocidades=[]
         for d,t in zip(diferencias, tiempos):
             velocidades.append(d/t)
@@ -145,6 +235,17 @@ class Procesado:
         return velocidades
 
     def normalizacion(lista, maximo, minimo):
+        '''
+        Normaliza los valores de la lista dada por parámetro.
+
+        Parámetros:
+        - lista: lista de valores que se van a normalizar.
+        - maximo: punto máximo de la lista para utilizar en la fórmula de la normalización.
+        - minimo: punto mínimo de la lista para utilizar en la fórmula de la normalización.
+
+        Retorno:
+        - Lista con los valores normalizados.
+        '''
         norm = []
         p = 0
         for l in range(len(lista)):
@@ -155,12 +256,24 @@ class Procesado:
 
     @classmethod
     def realizar_prediccion(self, ruta, mano, sexo, debug):
-        columnas = ['Max1. norm.', 'Max2. norm.', 'Max3. norm.', 'Max4. norm.', 'Max5. norm.', 
-                    'Max6. norm.', 'Max7. norm.', 'Max8. norm.', 'Max9. norm.', 'Max10. norm.', 'Min1. norm.', 
-                    'Min2. norm.', 'Min3. norm.', 'Min4. norm.', 'Min5. norm.', 'Min6. norm.', 'Min7. norm.', 
-                    'Min8. norm.', 'Min9. norm.', 'Min10. norm.', 'Diff1. norm.', 'Diff2. norm.', 'Diff3. norm.', 
-                    'Diff4. norm.', 'Diff5. norm.', 'Diff6. norm.', 'Diff7. norm.', 'Diff8. norm.', 'Diff9. norm.', 
-                    'Diff10. norm.', 'Mean speed', 'Hand R(0)/L(1)', 'Sex M(0)/W(1)']
+        '''
+        Realiza la predicción con los datos del vídeo procesado.
+
+        Parámetros:
+        - ruta: ruta donde está el fichero.
+        - mano: mano del paciente.
+        - sexo: sexo del paciente.
+        - debug: posibilidad de mostrar por la pantalla una barra de carga del procesado. Por defecto: False.
+
+        Retorno:
+        - Predicción realizada por el modelo en porcentaje.
+        '''
+        columnas = ['Max1. norm.', 'Max2. norm.', 'Max3. norm.', 'Max4. norm.', 'Max5. norm.', 'Max6. norm.', 
+                    'Max7. norm.', 'Max8. norm.', 'Max9. norm.', 'Max10. norm.', 'Min1. norm.', 'Min2. norm.', 
+                    'Min3. norm.', 'Min4. norm.', 'Min5. norm.', 'Min6. norm.', 'Min7. norm.', 'Min8. norm.', 
+                    'Min9. norm.', 'Min10. norm.', 'Diff1. norm.', 'Diff2. norm.', 'Diff3. norm.', 'Diff4. norm.', 
+                    'Diff5. norm.', 'Diff6. norm.', 'Diff7. norm.', 'Diff8. norm.', 'Diff9. norm.', 'Diff10. norm.', 
+                    'Mean speed', 'Hand R(0)/L(1)', 'Sex M(0)/W(1)']
         
         nombre_modelo = ""
         borrar = False
@@ -175,7 +288,7 @@ class Procesado:
         except (IndexError, EOFError):
             raise Exception("El modelo no es válido")
 
-        datos = self.analizarVideo(self, ruta, debug)
+        datos = self.analizar_video(self, ruta, debug)
         maximos, minimos = self.obtener_amplitudes(self, datos)
         tiempos = self.obtener_tiempos(datos, maximos, minimos)
 
@@ -195,4 +308,4 @@ class Procesado:
         lista.append(sexo)
         df = pd.DataFrame(data = [lista], columns=columnas)
 
-        return modelo.predict(df)
+        return modelo.predict_proba(df)
