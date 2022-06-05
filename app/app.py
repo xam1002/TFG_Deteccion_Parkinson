@@ -2,7 +2,6 @@
 # Autor: Álvaro Alonso Marín
 
 # Importación de bibliotecas
-from attr import Attribute
 from flask import Flask, render_template, request, url_for, redirect, flash
 from flask_mysqldb import MySQL
 from flask_wtf import CSRFProtect
