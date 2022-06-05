@@ -2,6 +2,7 @@
 # Autor: Álvaro Alonso Marín
 
 # Importación de bibliotecas
+from attr import Attribute
 from flask import Flask, render_template, request, url_for, redirect, flash
 from flask_mysqldb import MySQL
 from flask_wtf import CSRFProtect
@@ -326,7 +327,28 @@ def pagina_no_encontrada(error):
     Retorno:
     - Plantilla renderizada con mensaje de error.
     '''
+    try:
+        current_user.nombre
+    except AttributeError:
+        return redirect(url_for('login'))
     return render_template('404.html'), 404
+
+def pagina_no_permitida(error):
+    '''
+    Redirige las peticiones con métodos no permitidos al inicio.
+
+    Parámetros:
+    - error: tipo de error.
+
+    Retorno:
+    - Redirección a la pantalla inicial.
+    '''
+    try: 
+        if current_user.nombre == 'admin':
+            return redirect(url_for('admin'))
+        return redirect(url_for('upload'))
+    except AttributeError:
+        return redirect(url_for('login'))
 
 # Método raíz
 if __name__=='__main__':
@@ -334,5 +356,6 @@ if __name__=='__main__':
     csrf.init_app(app)
     app.register_error_handler(401, pagina_no_accesible)
     app.register_error_handler(404, pagina_no_encontrada)
-    app.run(debug=True)
+    app.register_error_handler(405, pagina_no_permitida)
+    app.run(host=app.config['HOST'], debug=True)
  
