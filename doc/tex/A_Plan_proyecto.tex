@@ -135,25 +135,142 @@ Fecha: 16/05/2022 - 23/05/2022
 	\item Cambiar más aspectos de la apariencia de la aplicación. Coste esperado: 13. Coste final: 13.
 	\item Realizar estudio de tiempos. Coste esperado: 8. Coste final: 8.
 	\item Buscar servidor en la nube para alojar la aplicación web. Coste esperado: 8. Coste final: 15.
-	\item Añadir certificado SSL al servidor. Coste esperado: 8. Coste final: .
+	\item Añadir certificado SSL al servidor. Coste esperado: 8. Coste final: 0.
 \end{itemize}
 
-\textbf{Resumen del sprint:} en este \textit{sprint} se pudo realizar todo sin problema a excepción de encontrar el servidor y añadir el certificado SSL. Esto se debió a la dificultad de encontrar una página de servidores que pudiera alojar el proyecto. El certificado SSL queda a la espera de encontrar un servidor definitivo. Coste estimado total: 37. Coste final total: .
+\textbf{Resumen del sprint:} en este \textit{sprint} se pudo realizar todo sin problema a excepción de encontrar el servidor y añadir el certificado SSL. Esto se debió a la dificultad de encontrar una página de servidores que pudiera alojar el proyecto. El certificado SSL queda a la espera de encontrar un servidor definitivo. Coste estimado total: 37. Coste final total: 36.
 
 \subsection{Sprint 14}
 Fecha: 23/05/2022 - 30/05/2022
 \begin{itemize}
-	\item Utilizar Heroku como servidor en la nube para alojar la aplicación web. Coste esperado: 8. Coste final: .
-	\item Añadir certificado SSL al servidor (Sprint 13). Coste esperado: 8. Coste final: .
-	\item Realizar especificación de diseño. Coste esperado: 8. Coste final: .
+	\item Utilizar Heroku como servidor en la nube para alojar la aplicación web. Coste esperado: 8. Coste final: 15.
+	\item Añadir certificado SSL al servidor (Sprint 13). Coste esperado: 8. Coste final: 0.
+	\item Realizar especificación de diseño. Coste esperado: 8. Coste final: 4.
 	\item Realizar la documentación de la memoria. Coste esperado: 8. Coste final: 10.
-	\item Continuar con la documentación técnica de programación. Coste esperado: 8. Coste final: .
+	\item Continuar con la documentación técnica de programación. Coste esperado: 8. Coste final: 0.
 \end{itemize}
 
-\textbf{Resumen del sprint:} en este \textit{sprint} sólo se pudo realizar la documentación de la memoria y parte de la especificación de diseño debido a la falta de tiempo. También hubo problemas la hora de arrancar la aplicación en Heroku, ya que aparecían errores. Nuevamente, el certificado SSL queda a la espera de encontrar un servidor definitivo. Coste estimado total: 40. Coste final total: .
+\textbf{Resumen del sprint:} en este \textit{sprint} sólo se pudo realizar la documentación de la memoria y parte de la especificación de diseño debido a la falta de tiempo. También hubo problemas la hora de arrancar la aplicación en Heroku, ya que aparecían errores. Nuevamente, el certificado SSL queda a la espera de encontrar un servidor definitivo. Coste estimado total: 40. Coste final total: 29.
+
+\subsection{Sprint 15}
+Fecha: 23/05/2022 - 30/05/2022
+\begin{itemize}
+	\item Utilizar Heroku como servidor en la nube para alojar la aplicación web (Sprint 14). Coste esperado: 8. Coste final: 10.
+	\item Probar Vercel como servidor en la nube para alojar la aplicación web. Coste esperado 4. Coste final: 4.
+	\item Añadir certificado SSL al servidor (Sprint 13). Coste esperado: 8. Coste final: 0.
+	\item Realizar especificación de diseño (Sprint 14). Coste esperado: 4. Coste final: 4.
+	\item Realizar manual de usuario. Coste esperado: 8. Coste final: 4.
+	\item Continuar con la documentación técnica de programación. Coste esperado: 8. Coste final: 10.
+	\item Realizar resumen y descriptores de la memoria. Coste esperado: 2. Coste final: 2.
+\end{itemize}
+
+\textbf{Resumen del sprint:} en este \textit{sprint} se pudieron terminar aquellas tareas pendientes de anteriores \textit{sprints} y casi toda la documentación. Además, no se pudo solucionar el problema de Heroku y tampoco se pudo utilizar Vercel por otros errores. Coste estimado total: 42. Coste final total: 34.
 
 \section{Estudio de viabilidad}
+En este apartado, se realiza un estudio de viabilidad tanto económica como legal sobre el proyecto realizado.
 
 \subsection{Viabilidad económica}
+Para conocer si el proyecto es viable desde el punto de vista económico, hay que tener en cuenta una estimación de sus costes de desarrollo.
+
+\subsubsection{Coste del personal}
+La tabla \ref{tab:coste_personal} refleja los costes relacionados con los sueldos y los impuestos de España.
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ l r }
+			\toprule
+			\textbf{Concepto} & \textbf{Coste (€)} \\ \midrule
+			Salario mensual neto \cite{salario} & 1313,08 \\
+			IRPF (15 \%) & 231,72 \\ 
+			Seguridad Social (32,1 \%) & 730,31 \\
+			Salario mensual bruto & 2275,11 \\ \midrule
+			\textbf{Total 4 meses} & 9100,44 \\ \bottomrule
+		\end{tabular}
+		\caption{Tabla con los costes de personal.}
+		\label{tab:coste_personal}
+	\end{center}
+\end{table}
+
+\subsubsection{Coste del \textit{software}}
+Todo el \textit{software} utilizado en el proyecto es gratuito, por lo que no es necesario calcular ningún gasto en este punto.
+
+\subsubsection{Coste del \textit{hardware}}
+El coste del \textit{hardware} se va a calcular teniendo en cuenta una amortización de 4 años de lo que ha durado el desarrollo del proyecto, es decir, 4 meses. La tabla \ref{tab:coste_hardware} refleja los costes relacionados con el \textit{hardware} necesario.
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ l c r }
+			\toprule
+			\textbf{Concepto} & \textbf{Coste (€)} & \textbf{Coste amortizado (€)} \\ \midrule
+			Ordenador portátil & 700 & 58,33 \\
+			\textit{Mainframe} & 2000 & 166,67 \\
+			GPU (x2) & 3000 & 250 \\ \midrule
+			\textbf{Total} & 5700 & 475 \\ \bottomrule
+		\end{tabular}
+		\caption{Tabla con los costes del \textit{hardware}.}
+		\label{tab:coste_hardware}
+	\end{center}
+\end{table}
+
+\subsubsection{Coste total}
+Para calcular el coste total del proyecto, se suman todos los costes. La tabla \ref{tab:coste_total} refleja el coste total.
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ l r }
+			\toprule
+			\textbf{Concepto} & \textbf{Coste (€)} \\ \midrule
+			Coste del personal & 9100,44 \\
+			Coste del \textit{software} & 0 \\
+			Coste del \textit{hardware} & 475 \\\midrule
+			\textbf{Total} & 9575,44 \\ \bottomrule
+		\end{tabular}
+		\caption{Tabla con los costes totales.}
+		\label{tab:coste_total}
+	\end{center}
+\end{table}
 
 \subsection{Viabilidad legal}
+Para conocer cuál sería la licencia más acorde con el proyecto desarrollado, hay que tener en cuenta las licencias de las herramientas y bibliotecas utilizadas para conocer la licencia que más se correspondería con el \textit{software} desarrollado en este trabajo. 
+
+Las licencias de las herramientas y bibliotecas utilizadas están recogidas en las tablas \ref{tab:licencias_herr} y \ref{tab:licencias_bib}, respectivamente.
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ l r }
+			\toprule
+			\textbf{Licencia} & \textbf{Herramienta} \\ \midrule
+			BSD & Flask \\ \midrule
+			Modified BSD & Anaconda \\ 
+			& Jupyter Notebook \\ \midrule
+			MIT & Visual Studio Code \\
+			& Bootstrap \\ \midrule
+			GNU & TeXstudio \\
+			& XAMPP \\ 
+			& Pencil \\ \bottomrule
+		\end{tabular}
+		\caption{Tabla con las licencias de las herramientas utilizadas.}
+		\label{tab:licencias_herr}
+	\end{center}
+\end{table}
+
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{ l r }
+			\toprule
+			\textbf{Licencia} & \textbf{Biblioteca} \\ \midrule
+			BSD & Pandas \\
+			& Matplotlib \\
+			& Joblib \\ \midrule
+			BSD modificada & Numpy \\ 
+			& SciPy \\
+			& Scikit-learn \\ \midrule
+			Apache 2.0 & OpenCV \\ 
+			& Mediapipe \\ \midrule
+			MIT & Imbalanced learn \\ \bottomrule
+		\end{tabular}
+		\caption{Tabla con las licencias de las bibliotecas utilizadas.}
+		\label{tab:licencias_bib}
+	\end{center}
+\end{table}
+
+Estas licencias son bastante permisivas, ya que son todas de \textit{software} libre. Para este proyecto se puede utilizar una licencia GPLv3~\cite{wiki:gpl} (\textit{General Public License version 3}), debido a que da la libertad de poder utilizar el software sin problemas de intentos de apropiación de terceros que modifiquen las libertades que da la licencia. Además, la versión 3 es la última.
