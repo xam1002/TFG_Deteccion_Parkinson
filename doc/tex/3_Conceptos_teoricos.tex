@@ -39,7 +39,7 @@ Para poder reconocer formas se utilizan lo que se conoce como descriptores de fo
 
 El factor de forma identifica qué forma tiene el objeto (\textit{i. e.} rectángulo, triángulo, círculo, etc.). La redondez identifica cómo de redondo es un objeto, siendo el objeto más redondo un círculo perfecto. La convexidad y la solidez identifican cómo de irregular es un objeto (\textit{e. g.} una televisión sería menos irregular que una estatua humana.)
 
-Para poder reconocer los colores hay varios métodos. Uno de los más utilizados es el espacio de color HSV (\textit{Hue Saturation Value}), donde se diferencian los colores en tono, saturación y brillo, como se aprecia en la figura \ref{fig:hsv}. Las imágenes o fotogramas procesados se convierten a HSV para obtener características que no se podían extraer con el espacio RGB (\textit{Red Green Blue}). Es verdaderamente útil cuando se trata de separar un objeto del fondo, y el color de este fondo es muy diferente al del objeto, como ocurre con la técnica del \textit{chroma key}, en donde los objetos se sitúan delante de un fondo normalmente verde para incorporarles un nuevo fondo diferente.
+Para poder reconocer los colores hay varios métodos. Uno de los más utilizados es el espacio de color HSV (\textit{Hue Saturation Value}), donde se diferencian los colores en tono, saturación y brillo, como se aprecia en la figura \ref{fig:hsv}. Las imágenes o fotogramas procesados se convierten a HSV para obtener características que no se podían extraer con el espacio RGB (\textit{Red Green Blue}). Es verdaderamente útil cuando se trata de separar un objeto del fondo, y el color de este fondo es muy diferente al del objeto, como ocurre con la técnica del \textit{chroma key}, en donde los objetos se sitúan delante de un fondo generalmente verde para incorporarles un nuevo fondo diferente.
 
 \begin{figure}[h]
 	\includegraphics[width=0.5\textwidth]{hsv}
@@ -78,7 +78,7 @@ Al dibujar los datos en forma de gráfica, como se observa en la figura \ref{fig
 	\label{fig:graficadistancias}
 \end{figure}
 
-La figura \ref{fig:graficadistanciaszoom} muestra uno de los picos de forma ampliada, notándose el suavizado del filtro frente a la gráfica sin suavizar eliminando los picos que producen ruido. Lo ideal sería que la curva fuese lo más perfecta posible, pero el propio pulso de la mano y, sobre todo, la biblioteca que coloca los puntos sobre la mano provocan esas imperfecciones que conviene solucionar. No obstante, aun aplicando el filtrado, no se consigue el resultado ideal, pues el filtrado es únicamente aproximación y una mejora del resultado real.
+La figura \ref{fig:graficadistanciaszoom} muestra uno de los picos de forma ampliada, notándose el suavizado del filtro frente a la gráfica sin suavizar eliminando los picos que producen ruido. Lo ideal sería que la curva fuese lo más perfecta posible, pero el propio pulso de la mano y, sobre todo, la biblioteca que coloca los puntos sobre la mano provocan esas imperfecciones que conviene solucionar. No obstante, aun aplicando el filtrado, no se consigue el resultado ideal, pues el filtrado es únicamente una aproximación y una mejora del resultado real.
 
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{grafica_distancias_zoom}
@@ -97,29 +97,31 @@ Las características obtenidas son las que conforman el conjunto de datos. Este 
 Los clasificadores se utilizan realizando una separación del conjunto total de los datos. Esta separación da lugar a los datos de entrenamiento y los datos de test:
 
 \begin{itemize}
-	\item Conjunto de entrenamiento: constituye la mayor parte de los datos, entre el 70 \% y 80 \% generalmente. Sirve para enseñar al modelo a clasificar el conjunto de datos, indicándole qué casos son de una clase y que casos de otra.
-	\item Conjunto de test: Sirve para probar cuánto de bueno es el modelo entrenado con los ejemplos de entrenamiento. Tras las predicciones, se comprobará la clase asignada a cada ejemplo y la clase real y se obtendrán unas precisiones.
+	\item Conjunto de entrenamiento: constituye la mayor parte de los datos, entre el 70 \% y 80 \% generalmente. Sirve para enseñar al modelo a clasificar el conjunto de datos, indicándole qué casos son de una clase y qué casos de otra.
+	\item Conjunto de test: Sirve para probar cuánto de bueno es el modelo entrenado con los ejemplos de entrenamiento. Tras las predicciones, se comprobará la clase asignada a cada ejemplo y la clase real, para obtener unas precisiones.
 \end{itemize}
 
-El conjunto de entrenamiento ha de contener más ejemplos que el conjunto de test debido a que cuanto más ejemplos se ofrezcan al modelo, más probable es que aprenda correctamente. Además, para probar cómo de bueno es un modelo, no son necesarios un alto número de ejemplos.
+El conjunto de entrenamiento ha de contener más ejemplos que el conjunto de test debido a que cuantos más ejemplos se ofrezcan al modelo, más probable es que aprenda correctamente. Además, para probar cómo de bueno es un modelo, no es necesario un alto número de ejemplos.
 
 Es importante que a la hora de evaluar el modelo se utilicen datos que no han sido utilizados para entrenar el modelo, ya que esos ejemplos siempre los acertarían. Debido a esto, es necesario tener estas dos divisiones.
+
+También es imprescindible que el conjunto de ejemplos esté equilibrado, es decir, que haya un equilibrio entre los ejemplos de una clase y de otra. Si un conjunto de datos no está equilibrado, al realizar el entrenamiento de un modelo, tenderá a predecir la clase mayoritaria. Además, si el número de ejemplos de la clase minoritaria es demasiado pequeño, el clasificador no tendrá suficientes ejemplos como para conocer cuándo se debe predecir esa clase, por lo que también conocerá más acerca de la clase mayoritaria y realizará las predicciones más a su favor.
 
 \subsection{Validación cruzada}
 La validación cruzada es una técnica que se utiliza a la hora de entrenar y probar modelos de aprendizaje. Se basa en dividir el conjunto de datos en un número de partes y utilizar cada una de las partes como conjunto de test y el resto para entrenar el modelo. Cada una de las partes será utilizada como conjunto de test de forma iterativa.
 
 Con esto se consigue que la selección de los conjuntos de entrenamiento y test no perjudique al resultado del modelo y se puedan probar más posibilidades de división de los datos.
 
-\subsection{Algoritmos de clasificación}
+\subsection{Algoritmos de clasificación} \label{clasificadores}
 Una de las formas más sencillas de encontrar patrones en los datos es utilizando modelos de aprendizaje. Hay varios modelos, y cada uno utiliza una forma de clasificar diferente. Los modelos empleados en este TFG son:
 \begin{itemize}
-	\item \textbf{Árboles de decisión:} consisten en construir un árbol formado por nodos con condiciones y hojas con clases, para que los datos sean clasificados dependiendo de si cumplen una condición de un nodo o no.~\cite{arbol_decision}
+	\item \textbf{Árboles de decisión:} se trata de construir un árbol formado por nodos con condiciones y hojas con clases, para que los datos sean clasificados dependiendo de si cumplen una condición de un nodo o no.~\cite{arbol_decision}
 	\item \textbf{Random Forest:} se trata de clasificar los ejemplos utilizando varios árboles de decisión. Estos árboles se construyen utilizando un subconjunto del conjunto total de datos de entrenamiento. Cada árbol predecirá una clase, y la más frecuente será la que se le asigne al atributo.~\cite{random_forest}
-	\item \textbf{k-Nearest Neighbors:} se trata de obtener la clase de los vecinos más cercanos al ejemplo que se trata de clasificar. En este clasificador, no hay un paso previo de entrenamiento, sino que se realiza la predicción utilizando el conjunto de entrenamiento original.~\cite{knn}
+	\item \textbf{k-Nearest Neighbors:} se trata de obtener la clase mayoritaria de los $k$ vecinos más cercanos al ejemplo que se trata de clasificar. En este clasificador, no hay un paso previo de entrenamiento, sino que se realiza la predicción utilizando el conjunto de entrenamiento original.~\cite{knn}
 	\item \textbf{Naive Bayes:} se trata de calcular la frecuencia de aparición de los valores de cada característica para poder realizar una clasificación. Esto haría que un ejemplo con ciertos valores se le asigne una clase debido a la probabilidad de aparición de sus valores.~\cite{naive_bayes}
-	\item \textbf{Naive Bayes Gaussiano:} es una variante del clasificador Naive Bayes y se trata de utilizar las probabilidades de que aparezcan los valores de, pero acorde con una distribución normal.~\cite{naive_bayes_g}
+	\item \textbf{Naive Bayes Gaussiano:} es una variante del clasificador Naive Bayes y se trata de utilizar las probabilidades de que aparezcan los valores de los atributos, pero acorde con una distribución normal.~\cite{naive_bayes_g}
 	\item \textbf{SVM:} se trata de conseguir un hiperplano que separe los ejemplos que compartan la misma clase del resto. A la hora de clasificar un ejemplo, dependiendo de dónde se encuentre, se le asignará una clase u otra.~\cite{svm}
-	\item \textbf{Dummy:} es el clasificador más sencillo que existe, ya que siempre predice la clase que mayoritaria, por lo que nunca tendrá buenas precisiones cuando los datos se encuentren equilibrados.~\cite{dummy}
+	\item \textbf{Dummy:} es el clasificador más sencillo que existe, ya que siempre predice la clase que más veces aparece en el conjunto de datos, por lo que nunca tendrá buenas precisiones cuando los datos se encuentren equilibrados.~\cite{dummy}
 \end{itemize}
 
 \section{Evaluación de los resultados}
@@ -136,7 +138,7 @@ Cuando se utiliza un clasificador, se realizan varias predicciones con el conjun
 	
 \end{itemize}
 
-\subsection{Medidas}
+\subsection{Medidas} \label{medidas}
 Las medidas son formas de representar los resultados para obtener diferentes puntos de vista a la hora de evaluar los resultados. Las medidas utilizadas en este TFG son:
 
 \begin{itemize}
