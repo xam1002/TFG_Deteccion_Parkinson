@@ -38,7 +38,7 @@ La estructura de ficheros seguida para el desarrollo de la aplicación es la sig
 En este apartado se detallan las aplicaciones necesarias desde el punto de vista de un programador.
 
 \subsection{Base de datos MySQL}
-En este proyecto se ha utilizado una base de datos MySQL utilizando XAMPP, aunque puede ser utilizada una base de datos MySQL sin necesidad de utilizar XAMPP. El nombre de la base de datos, así como el usuario y la contraseña de esta deben ser especificados en el fichero \textit{config.py}, concretamente en las variables \textit{MYSQL\_HOST} para el \textit{host} de la base de datos, que generalmente será \textit{localhost}; \textit{MYSQL\_USER} y \textit{MYSQL\_PASSWORD} para el nombre de usuario de la base de datos y la contraseña, respectivamente y \textit{MYSQL\_DB} para el nombre de la base de datos.
+En este proyecto se ha utilizado una base de datos MySQL utilizando XAMPP, aunque puede ser utilizada una base de datos MySQL sin necesidad de utilizar XAMPP. El nombre de la base de datos, así como el usuario y la contraseña de esta deben ser especificados en el fichero \textit{config.py}, concretamente en las variables \textit{MYSQL\_HOST} para el \textit{host} de la base de datos, que generalmente será \textit{localhost}; \textit{MYSQL\_USER} y \textit{MYSQL\_PASSWORD} para el nombre de usuario de la base de datos y la contraseña, respectivamente y \textit{MYSQL\_DB} para el nombre de la base de datos. Por defecto en el fichero \textit{config.py} el usuario de la base de datos es \textit{root} y la contraseña \textit{123456}, pero al crear la base de datos el usuario será el mismo y no habrá contraseña.
 
 \subsection{Servidor en local}
 Dado que se trata de un servidor, para conectarse desde otro equipo como cliente es necesario establecer una dirección IP al servidor y además, estar conectado a la misma red que el servidor. Si el cliente no está conectado a la misma red que el servidor, entonces será necesario abrir los puertos del \textit{router} para que el servidor sea alcanzable desde el exterior. Como las direcciones IP de los equipos pueden variar, lo mejor será establecer en un principio el servidor como local, es decir, utilizando la dirección IP local del equipo, la 127.0.0.1, para no complicar la instalación.
@@ -50,10 +50,10 @@ En este apartado se explica cómo se compila, se instala y se ejecuta el \textit
 Para instalar el proyecto, se han de seguir los siguientes pasos:
 
 \begin{enumerate}
-	\item Acceder al repositorio de \href{https://github.com/xam1002/TFG_Deteccion_Parkinson}{GitHub} y descargar el archivo ZIP mediante la opción ``Code'' > ``Download ZIP''.
+	\item Acceder al repositorio de \href{https://github.com/xam1002/TFG_Deteccion_Parkinson}{GitHub} y descargar el archivo ZIP \textit{app.py} de la \textit{release}.
 	\item Descomprimir el archivo en el lugar deseado para trabajar.
 	\item Iniciar la consola en el directorio \textit{app} y ejecutar el comando \texttt{pip install -r requirements.txt} para instalar las bibliotecas de la aplicación. Es importante tener instalada al menos la versión 3.9.7 de Python para no tener incompatibilidades.
-	\item Importar el fichero \textit{flask\_bd} en una base de datos MySQL con nombre \textit{flask\_bd}.
+	\item Importar el fichero \textit{flask\_bd.sql} en una base de datos MySQL con nombre \textit{flask\_bd}.
 \end{enumerate}
 
 \subsection{Compilación}
@@ -64,7 +64,7 @@ Para iniciar la aplicación, es necesario tener en cuenta lo siguiente:
 
 \begin{itemize}
 	\item Arrancar la base de datos.
-	\item Iniciar la aplicación desde la consola utilizando el comando \texttt{py app.py} desde el directorio \textit{app}.
+	\item Iniciar la aplicación desde la consola utilizando el comando \texttt{py app.py} o \texttt{python app.py} desde el directorio \textit{app}.
 \end{itemize}
 
 \section{Pruebas del sistema}
@@ -99,19 +99,19 @@ Dado que es necesario que un usuario esté dado de alta en la aplicación, un cl
 	\end{center}
 \end{table}
 
-Aquellas direcciones de la tabla que tengan el símbolo \# quiere decir que la dirección contiene justo después un valor numérico. En caso de utilizar esa misma dirección sin ese valor numérico o reemplazando el símbolo \# por un valor no numérico, aparecería la plantilla \textit{404.html} renderizada.
+Aquellas direcciones de la tabla que tengan el símbolo \# quieren decir que la dirección contiene justo después un valor numérico. En caso de utilizar esa misma dirección sin ese valor numérico o reemplazando el símbolo \# por un valor no numérico, aparecería la plantilla \textit{404.html} renderizada.
 
 \subsection{Base de datos}
 La base de datos cuenta con una clave primaria y una clave única, tal y como se comentó en el apartado \ref{datos} de este documento. Por este motivo, se contemplan aquellas consultas que no cumplan las restricciones, por ejemplo, si se repite el ID o si se repite el nombre de usuario.
 
-El ID no puede repetirse ya que cada vez que se asigna un nuevo ID a un usuario creado, se obtiene el ID más bajo disponible. Sin embargo, dado que el nombre de usuario puede ser introducido a mano, aparecerá un mensaje advirtiendo al cliente que no puede utilizar ese nombre, ya que está en uso. Este mensaje de error aparecerá tanto en la opción de añadir usuario como en la de modificar usuario.
+El ID no puede repetirse de forma manual ya que cada vez que se asigna un nuevo ID a un usuario creado, se obtiene el ID más bajo disponible. Sin embargo, dado que el nombre de usuario puede ser introducido a mano, aparecerá un mensaje advirtiendo al cliente que no puede utilizar ese nombre, ya que está en uso. Este mensaje de error aparecerá tanto en la opción de añadir usuario como en la de modificar usuario.
 
 En el inicio de sesión, cuando el cliente introduzca el usuario y la contraseña, ambos serán comprobados en la base de datos. Si el usuario no existe, aparecerá un mensaje indicando al cliente que el usuario introducido es incorrecto. Si la contraseña no coincide con la almacenada en la base de datos para el usuario introducido, aparecerá un mensaje indicando que la contraseña es incorrecta.
 
 \subsection{Campos vacíos o incorrectos}
 En varias pantallas de la aplicación es necesario rellenar campos o subir ficheros para poder realizar correctamente la tarea que se pretende. Si no se rellenan los campos del inicio de sesión, se mostrará un mensaje indicando que ese usuario no es correcto.
 
-Si no se selecciona ningún vídeo en la pantalla principal, se mostrará un mensaje de que es necesario rellenar los campos. Si sólo se rellenan los campos mano y sexo, aparecerá un mensaje indicando al cliente que el vídeo no es correcto. Si se sube un fichero con una extensión incorrecta, se mostrará el mismo mensaje.
+Si no se selecciona ningún vídeo en la pantalla principal, se mostrará un mensaje de que es necesario rellenar los campos. Si sólo se rellenan los campos mano y sexo, aparecerá un mensaje indicando al cliente que el vídeo no es correcto. Si se sube un fichero con una extensión incorrecta, se mostrará el mismo mensaje. En caso de seleccionar un vídeo en el que no aparezca una mano o esta se salga en algún momento, aparecerá una pantalla indicando al usuario que ha ocurrido un error y que pruebe a subir otro vídeo debido que el vídeo subido no es correcto.
 
 De forma muy similar ocurre al actualizar el modelo. Tanto si no se ha seleccionado ningún modelo como si el fichero es incorrecto, aparecerá un mensaje avisando de que el archivo no es válido.
 
