@@ -246,7 +246,7 @@ def uploader():
     '''
     if request.method == 'POST':
         try:
-            extensiones = [".ogm", ".wmv", ".mpg", ".webm", ".ogv", ".mov", ".asx", ".mpeg", ".mp4", ".m4v", ".avi"]
+            extensiones = [".ogm", ".wmv", ".mpg", ".webm", ".ogv", ".mov", ".asx", ".mpeg", ".mp4", ".m4v", ".avi", ".mkv"]
             f = request.files['archivo']
             filename = secure_filename(f.filename)
             mano = request.form['mano']
@@ -255,13 +255,17 @@ def uploader():
                 flash("Archivo no válido...")
                 return redirect(url_for('admin'))
             f.save(os.path.join(app.config['CARPETA_VIDEOS'], filename))
-            prediccion = Procesado.realizar_prediccion(app.config['CARPETA_VIDEOS']+"//"+filename, mano, sexo, app.config['DEBUG_PROCESADO'])
-            os.remove(app.config['CARPETA_VIDEOS']+"//"+filename)
+            prediccion = Procesado.realizar_prediccion(os.path.join(app.config['CARPETA_VIDEOS'], filename), mano, sexo, app.config['DEBUG_PROCESADO'])
+            os.remove(os.path.join(app.config['CARPETA_VIDEOS'], filename))
         except BadRequestKeyError:
             flash("Se deben rellenar todos los campos...")
             if current_user.nombre == 'admin':
                 return redirect(url_for('admin'))
             return redirect(url_for('upload'))
+        except Exception as e:
+            print("Error:", e)
+            os.remove(os.path.join(app.config['CARPETA_VIDEOS'], filename))
+            return render_template('error.html')
 
     return render_template('pred/prediccion.html', data = {'prediccion': round(prediccion[0][1], 4)})
 
@@ -298,15 +302,16 @@ def subida_modelo():
             if os.path.splitext(filename)[1] != '.pkl':
                 flash("Archivo no válido...")
                 return redirect(url_for('modificar_modelo'))
-            for g in glob.glob('..//Flask//app//modelo//*'):
+            for g in glob.glob(os.path.join('..', 'app', 'modelo', '*')):
                 os.remove(g)
             f.save(os.path.join(app.config['CARPETA_MODELOS'], filename))
         return render_template('admin/modelo_actualizado.html')
     return redirect(url_for('upload'))
+    
 
 def pagina_no_accesible(error):
     '''
-    Redirige las peticiones de accesos restringidos a la pantalla de inicio de seisón.
+    Redirige las peticiones de accesos restringidos a la pantalla de inicio de sesión.
 
     Parámetros:
     - error: tipo de error
