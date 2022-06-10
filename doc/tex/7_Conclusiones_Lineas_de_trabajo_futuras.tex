@@ -2,7 +2,7 @@
  En este apartado, se exponen las conclusiones obtenidas tras realizar el trabajo. Además, se comentan las posibles líneas futuras del proyecto.
  
  \section{Conclusiones}
- Como ya se ha comentado en el punto \ref{resultados} de la sección de aspectos relevantes, se ha obtenido un clasificador capaz de realizar una clasificación bastante decente. Además, los objetivos planteados al inicio del proyecto se han podido completar en su completitud o en gran parte de ella.
+ Como ya se ha comentado en el punto \ref{resultados} de la sección de aspectos relevantes, se ha obtenido un clasificador capaz de realizar una clasificación bastante aceptable. Además, los objetivos planteados al inicio del proyecto se han podido completar en su totalidad o en gran parte de ella.
  
  \subsection{Objetivo de la investigación}
  Este objetivo ha podido ser completado satisfactoriamente, ya que se ha realizado una fase de investigación sobre la inteligencia artificial, concretamente, de la visión artificial.
@@ -16,10 +16,10 @@
  
  La aplicación es totalmente funcional, ya que cuenta con varias opciones de administración, además de una pantalla amigable y sencilla para ser utilizada sin requerir conocimientos previos.
  
- El mayor inconveniente ha sido la clasificación. La aplicación está diseñada para predecir tres niveles de probabilidad de tener Parkinson: baja (menor al 33 \%), media (entre el 33 \% y el 67 \%) y alta (mayor al 67 \%) , sin embargo, no suele llegar al nivel bajo. No obstante, generalmente, es capaz de distinguir una persona con Parkinson de una que no, ya que para la primera predice entre un 80 y un 90 \%, mientras que para la segunda predice entre 40 y un 50 \%.
+ El mayor inconveniente ha sido la clasificación. La aplicación está diseñada para predecir tres niveles de probabilidad de tener Parkinson: baja (menor al 33 \%), media (entre el 33 \% y el 67 \%) y alta (mayor al 67 \%), sin embargo, no suele llegar al nivel bajo. Teniendo en cuenta que este proyecto ha tratado una clasificación binaria (\textit{i. e.} sí tiene Parkinson o no), lo lógico sería pensar que no tener Parkinson equivale a un nivel bajo, un nivel alto equivaldría a tener Parkinson y un nivel medio sería un punto intermedio. No obstante, generalmente, es capaz de distinguir una persona con Parkinson de una que no, ya que para la primera predice entre un 80 y un 90 \%, mientras que para la segunda predice entre 40 y un 50 \%.
  
  \section{Líneas futuras}
- La dificultad de obtener suficientes datos para realizar el entrenamiento de modelos ha provocado que la aplicación web se haya implementado con un modelo que no sea el mejor posible para diferenciar correctamente los niveles de probabilidad de padecer Parkinson.
+ La dificultad de obtener suficientes datos para realizar el entrenamiento de modelos ha provocado que la aplicación web se haya implementado con un modelo que no es el modelo ideal, con el que diferenciar correctamente los tres niveles de probabilidad de padecer Parkinson, ya que el modelo actual apenas realiza predicciones con un bajo porcentaje.
  
  Sin embargo, dada la sencillez para cambiar el modelo de predicción de la aplicación, pues se ha implementado una opción de configuración para poder cambiar rápidamente el modelo, como línea futura se puede proponer entrenar un mejor clasificador utilizando datos mejores para poder utilizarlo en la aplicación.
  
