@@ -1,8 +1,10 @@
+import os
+
 class Config:
     SECRET_KEY = 'B!1weNAt1T^%kvhUI*S^'
     WTF_CSRF_SECRET_KEY = 'B2@reNAt1T^%kvhUI*S^'
 
-class DevelopmentConfing(Config):
+class DevelopmentConfig(Config):
     DEBUG = True
     DEBUG_PROCESADO = True
     HOST = 'localhost'
@@ -10,9 +12,9 @@ class DevelopmentConfing(Config):
     MYSQL_USER = 'root'
     MYSQL_PASSWORD = '123456'
     MYSQL_DB = 'flask_bd'
-    CARPETA_VIDEOS = '..//Flask//app//video'
-    CARPETA_MODELOS = '..//Flask//app//modelo'
+    CARPETA_VIDEOS = os.path.join('..', 'app', 'video')
+    CARPETA_MODELOS = os.path.join('..', 'app', 'modelo')
 
 config = {
-    'development': DevelopmentConfing,
+    'development': DevelopmentConfig,
 }
