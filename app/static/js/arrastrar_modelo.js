@@ -1,3 +1,6 @@
+// Realiza las subida del modelo al servidor con la herramienta de arrastrar
+// y establece el estilo de cada operación.
+
 const area = document.querySelector(".arrastrar");
 const texto = area.querySelector("h2");
 const input = area.querySelector("#archivo")
