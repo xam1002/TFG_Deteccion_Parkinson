@@ -74,25 +74,26 @@ En este apartado se explican aquellas pruebas realizadas para comprobar el corre
 Dado que es necesario que un usuario esté dado de alta en la aplicación, un cliente únicamente podrá acceder a la pantalla de inicio de sesión. Una vez iniciada la sesión, si este usuario no es el administrador, tampoco podrá acceder a las pantallas del administrador. Al tratarse de una aplicación web, los clientes podrían acceder a las diferentes pantallas de la aplicación utilizando la barra de direcciones y escribiendo manualmente la dirección. La tabla \ref{tab:redirecciones} muestra las direcciones posibles de la página web y la redirección dependiendo de los privilegios.
 
 \begin{table}[h]
+	\small
 	\begin{center}
-		\begin{tabular}{ l c c c }
+		\begin{tabular}{ l l l l }
 			\toprule
 			\textbf{Dirección} & \textbf{Sin usuario} & \textbf{Usuario} & \textbf{Administrador} \\ \midrule
-			\textit{/} & \textit{/login} & \textit{/login} & \textit{/login} \\
-			\textit{/login} & \textit{/login} & \textit{/login} & \textit{/login} \\ 
-			\textit{/logout} & \textit{/login} & \textit{/login} & \textit{/login} \\
-			\textit{/gestion\_usuarios} & \textit{/login} & \textit{/upload} & \textit{/gestion\_usuarios} \\ 
-			\textit{/agregar\_usuario} & \textit{/login} & \textit{/upload} & \textit{/agregar\_usuario} \\ 
-			\textit{/usuario\_agregado} & \textit{/login} & \textit{/upload} & \textit{/admin} \\
-			\textit{/modificar\_usuario/\#} & \textit{/login} & \textit{/modificar\_usuario/\#} & \textit{/modificar\_usuario/\#} \\
-			\textit{/usuario\_modificado/\#} & \textit{/login} & \textit{/upload} & \textit{/gestion\_usuarios} \\ 
-			\textit{/usuario\_borrado/\#} & \textit{/login} & \textit{/upload} & \textit{/gestion\_usuarios} \\
-			\textit{/upload} & \textit{/login} & \textit{/upload} & \textit{/upload} \\
-			\textit{/admin} & \textit{/login} & \textit{/upload} & \textit{/admin} \\
-			\textit{/uploader} & \textit{/login} & \textit{/upload} & \textit{/admin} \\
-			\textit{/modificar\_modelo} & \textit{/login} & \textit{/upload} & \textit{/modificar\_modelo} \\ 
-			\textit{/subida\_modelo} & \textit{/login} & \textit{/upload} & \textit{/admin} \\
-			Cualquier otra ruta & \textit{/login} & \textit{404.html} & \textit{404.html} \\ \bottomrule
+			\texttt{/} & \texttt{/login} & \texttt{/login} & \texttt{/login} \\
+			\texttt{/login} & \texttt{/login} & \texttt{/login} & \texttt{/login} \\ 
+			\texttt{/logout} & \texttt{/login} & \texttt{/login} & \texttt{/login} \\
+			\texttt{/gestion\_usuarios} & \texttt{/login} & \texttt{/upload} & \texttt{/gestion\_usuarios} \\ 
+			\texttt{/agregar\_usuario} & \texttt{/login} & \texttt{/upload} & \texttt{/agregar\_usuario} \\ 
+			\texttt{/usuario\_agregado} & \texttt{/login} & \texttt{/upload} & \texttt{/admin} \\
+			\texttt{/modificar\_usuario/\#} & \texttt{/login} & \texttt{/modificar\_usuario/\#} & \texttt{/modificar\_usuario/\#} \\
+			\texttt{/usuario\_modificado/\#} & \texttt{/login} & \texttt{/upload} & \texttt{/gestion\_usuarios} \\ 
+			\texttt{/usuario\_borrado/\#} & \texttt{/login} & \texttt{/upload} & \texttt{/gestion\_usuarios} \\
+			\texttt{/upload} & \texttt{/login} & \texttt{/upload} & \texttt{/upload} \\
+			\texttt{/admin} & \texttt{/login} & \texttt{/upload} & \texttt{/admin} \\
+			\texttt{/uploader} & \texttt{/login} & \texttt{/upload} & \texttt{/admin} \\
+			\texttt{/modificar\_modelo} & \texttt{/login} & \texttt{/upload} & \texttt{/modificar\_modelo} \\ 
+			\texttt{/subida\_modelo} & \texttt{/login} & \texttt{/upload} & \texttt{/admin} \\
+			Cualquier otra ruta & \texttt{/login} & \textit{404.html} & \textit{404.html} \\ \bottomrule
 \end{tabular}
 		\caption{Tabla con las redirecciones dependiendo del usuario.}
 		\label{tab:redirecciones}
