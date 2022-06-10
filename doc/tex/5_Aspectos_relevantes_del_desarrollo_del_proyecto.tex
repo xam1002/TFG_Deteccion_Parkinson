@@ -71,7 +71,7 @@ Para realizar la predicción, se han utilizado los clasificadores ya explicados 
 
 \begin{table}[h]
 	\begin{center}
-		\begin{tabular}{ l c c c c c c c }
+		\begin{tabular}{ l l l l l l l l }
 			\toprule
 			\textbf{Medidas} & \textbf{RF} & \textbf{k-NN} & \textbf{AD} & \textbf{NBG} & \textbf{SVM} & \textbf{NB} & \textbf{Dummy} \\ \midrule
 			accuracy & 0,719 & 0,544 & 0,669& 0,4888 & 0,562 & 0,575 & 0,562 \\
@@ -95,8 +95,9 @@ Por otro lado, la precisión indica que hay un 71,9 \% de ejemplos bien clasific
 Se ha realizado un estudio de los tiempos que tardan en entrenar los modelos. Para ello, se han realizado 10 ejecuciones con cada modelo para conocer una aproximación del tiempo que tardan en entrenar, donde se han obtenido los siguientes resultados en segundos:
 
 \begin{table}[h]
+	\small
 	\begin{center}
-		\begin{tabular}{ l c c c c c c c }
+		\begin{tabular}{ l l l l l l l l }
 			\toprule
 			\textbf{Ejecuciones} & \textbf{RF} & \textbf{k-NN} & \textbf{AD} & \textbf{NBG} & \textbf{SVM} & \textbf{NB} & \textbf{Dummy} \\ \midrule
 			1 & 0,32934 & 0,00397 & 0,00347 & 0,00294 & 0,005 & 0,00505 & 0,00046 \\
@@ -132,8 +133,9 @@ En la otra parte está el clasificador Dummy. Como ya se ha comentado, este clas
 También se ha realizado un estudio de los tiempos que tardan en predecir los modelos. Al igual que sucedía con el estudio anterior, se han realizado 10 ejecuciones con cada modelo para conocer una aproximación del tiempo que tardan en predecir, donde se han obtenido los siguientes resultados:
 
 \begin{table}[h]
+	\small 
 	\begin{center}
-		\begin{tabular}{ l c c c c c c c }
+		\begin{tabular}{ l l l l l l l l }
 			\hline
 			\textbf{Ejecuciones} & \textbf{RF} & \textbf{k-NN} & \textbf{AD} & \textbf{NBG} & \textbf{SVM} & \textbf{NB} & \textbf{Dummy} \\ \hline
 			1 & 0,02381 & 0,00502 & 0,00149 & 0,00301 & 0,00397 & 0,00285 & 0,00053 \\
