@@ -277,14 +277,14 @@ class Procesado:
         
         nombre_modelo = ""
         borrar = False
-        for g in glob.glob('..//Flask//app//modelo//*'):
-            if ".pkl" in g.split("//")[-1].split("\\")[-1] and not borrar:
-                nombre_modelo = g.split("//")[-1].split("\\")[-1]
+        for g in glob.glob(os.path.join('..', 'app', 'modelo', '*')):
+            if ".pkl" in os.path.split(g)[1] and not borrar:
+                nombre_modelo = os.path.split(g)[1]
                 borrar = True
             else:
                 os.remove(g)
         try:
-            modelo = joblib.load('..//Flask//app//modelo//' + nombre_modelo)
+            modelo = joblib.load(os.path.join('..', 'app', 'modelo', nombre_modelo))
         except (IndexError, EOFError):
             raise Exception("El modelo no es válido")
 
