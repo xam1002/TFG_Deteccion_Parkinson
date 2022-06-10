@@ -35,16 +35,18 @@ Para la extracción de las distancias, tanto la original como la normalizada, ta
 \subsection{Tiempo}
 Otra de las características que podrían afectar a una persona que tiene Parkinson es cuánto tardaría en realizar el movimiento de pinza, ya que, en un principio, aquellos que padezcan la enfermedad tardarán más.
 
-Para ello, se ha realizado la diferencia entre un máximo y el mínimo correspondiente, pero en este caso, para obtener el número de fotogramas que hay entre ambos puntos, con el fin de utilizar como unidad temporal el número de fotogramas, ya que, a más lentitud, más fotogramas habrá de diferencia y viceversa.
+Para ello, se ha realizado la diferencia entre un máximo y el mínimo correspondiente. En este caso se ha utilizado como unidad temporal el número de fotogramas entre ambos puntos, ya que, a más lentitud, más fotogramas habrá de diferencia y viceversa.
 
 Sin embargo, esta medida resulta no ser suficiente porque no se tiene en cuenta cuánto se ha abierto la pinza, es decir, alguien que abra la pinza lentamente y hasta la mitad tardará el mismo tiempo que alguien que la abra más rápido y hasta el máximo.
 
 \subsection{Velocidad}
-Para solucionar el problema anterior, se puede utilizar la velocidad. Esto es, calcular la distancia recorrida por unidad de tiempo, por lo que dependiendo de cuánto se recorra y en cuánto tiempo una persona tendrá más velocidad o no.
+Para solucionar el problema anterior, se puede utilizar la velocidad. Esto es, calcular la distancia recorrida por unidad de tiempo, por lo que dependiendo de cuánto se recorra y en cuánto tiempo, una persona tendrá más velocidad o no.
 
 En una primera instancia, una persona que padece Parkinson, dada su reducida movilidad, pese a abrir la pinza hasta su punto máximo, lo más seguro es que lo hiciera de forma más lenta que otra persona sin Parkinson.
 
 Esta velocidad se calcula realizando la división de la diferencia normalizada entre un máximo y un mínimo (\textit{i. e.} la amplitud ya calculada), entre el tiempo que les separa a ambos puntos (\textit{i. e.} el tiempo ya calculado).
+
+Para este trabajo, se ha calculado la velocidad media de cada vídeo.
 
 \subsection{Mano derecha o izquierda}
 Como añadido, también se ha tenido en cuenta si la mano es derecha o izquierda. En un principio, podría resultar interesante conocer cuál es la mano que más dificultades tiene a la hora de realizar el movimiento, aunque tampoco resulta fundamental para clasificar. Esta característica no es calculada, sino que viene dada con el vídeo.
@@ -55,12 +57,14 @@ El sexo de la persona podría servir para clasificar las personas con y sin Park
 \subsection{Edad}
 De forma similar a lo que ocurre con el sexo, el Parkinson es más propenso en personas mayores, de 60 años, por lo que la edad también podría resultar interesante a la hora de clasificar.
 
-Sin embargo, hay que tener cuidado con los ejemplos a la hora de entrenar modelos, ya que el sistema podría aprender que todos los menores de, por ejemplo, 30 años nunca tendrán Parkinson, cuando esto no es cierto. Esto dependerá de la muestra de entrenamiento, ya que si hay pacientes de diversas edades con Parkinson, el modelo realizará la predicción teniendo en cuenta también esos casos. Esta característica tampoco es calculada, también viene dada con el vídeo.
+Sin embargo, hay que tener cuidado con los ejemplos a la hora de entrenar modelos, ya que el sistema podría aprender que todos los menores de, por ejemplo, 30 años nunca tendrán Parkinson, cuando esto no es cierto. Esto dependerá de la muestra de entrenamiento, ya que si hay pacientes de diversas edades con Parkinson, el modelo realizará la predicción teniendo en cuenta también esos casos. 
+
+Pese a poder ser interesante, esta característica con los datos utilizados no mejora los resultados, por lo que finalmente no será utilizada. Esta característica tampoco es calculada, también viene dada con el vídeo.
 
 \section{Resultados} \label{resultados}
-Dado que el conjunto de datos utilizado para entrenar el modelo no está equilibrado, los resultados no son realmente buenos. Este conjunto de datos no cuenta con demasiados ejemplos de personas sin Parkinson, por lo que el clasificador no es capaz de distinguir correctamente a dos pacientes con y sin Parkinson.
+Para obtener mejores resultados es importante que el conjunto de datos utilizado para entrenar el modelo esté equilibrado. Sin embargo, estos resultados no son tan buenos como se podría esperar, aunque sí se obtiene una diferencia entre aquellos con y sin Parkinson. Este conjunto de datos debería contar con más ejemplos para que el clasificador fuese capaz de distinguir diferentes niveles de Parkinson entre dos pacientes.
 
-Sin embargo, se ha realizado un estudio de los resultados, utilizando las métricas ya explicadas en el apartado \ref{medidas} para conocer cuál es el clasificador que mejor predice. Además, también se ha realizado un estudio de tiempos, para conocer cuál es el clasificador más rápido.
+Para conocer cuál es el clasificador que mejor predice, se ha realizado un estudio de los resultados, utilizando las métricas ya explicadas en el apartado \ref{medidas}. Además, también se ha realizado un estudio de tiempos, para conocer cuál es el clasificador más rápido.
 
 \subsection{Predicción}
 Para realizar la predicción, se han utilizado los clasificadores ya explicados en el apartado \ref{clasificadores}, donde cada columna se corresponde a las siglas de cada clasificador. Se han descartado algunas de las características obtenidas como las amplitudes sin normalizar, la edad o el tiempo ya que empeoraban la clasificación. Además, se ha utilizado una validación cruzada de 2 divisiones y 5 repeticiones, obteniéndose los siguientes resultados:
@@ -70,26 +74,22 @@ Para realizar la predicción, se han utilizado los clasificadores ya explicados 
 		\begin{tabular}{ l c c c c c c c }
 			\toprule
 			\textbf{Medidas} & \textbf{RF} & \textbf{k-NN} & \textbf{AD} & \textbf{NBG} & \textbf{SVM} & \textbf{NB} & \textbf{Dummy} \\ \midrule
-			accuracy & 0,775 & 0,8 & 0,712 & 0,719 & 0,812 & 0,812 & 0,812 \\
-			Matt. corr. coeff. & -0,001 & -0,025 & 0,048 & -0,045 & 0 & 0 & 0 \\ 
-			f1 & 0,87 & 0,889 & 0,821 & 0,824 & 0,897 & 0,897 & 0,897 \\
-			ROC AUC & 0,59 & 0,429 & 0,528 & 0,494 & 0,367 & 0,29 & 0,5 \\
-			g mean & 0,109 & 0 & 0,295 & 0,098 & 0 & 0 & 0 \\ \bottomrule
+			accuracy & 0,719 & 0,544 & 0,669& 0,4888 & 0,562 & 0,575 & 0,562 \\
+			Matt. corr. coeff. & 0,435 & 0,084 & 0,315 & -0,015 & 0,013 & 0,075 & 0 \\ 
+			f1 & 0,75 & 0,577 & 0,71 & 0,482 & 0,707 & 0,708 & 0,72 \\
+			ROC AUC & 0,776 & 0,547 & 0,663& 0,467 & 0,57 & 0,521 & 0,5 \\
+			g mean & 0,706 & 0,522 & 0,609 & 0,468 & 0,056 & 0,252 & 0 \\ \bottomrule
 		\end{tabular}
 		\caption{Tabla con las medidas y clasificadores utilizados.}
 		\label{tab:medidas}
 	\end{center}
 \end{table}
 
-Lo más destacable de estos resultados es el área bajo la curva ROC (\textit{ROC AUC}). Si bien la precisión (\textit{accuracy}) podría ser interesante, en este caso el valor resulta engañoso. Esto se debe a que algunas de estas precisiones realizan una clasificación de la clase mayoritaria, que es Parkinson sí. Dado que el conjunto de datos contiene 6 personas sin Parkinson y 26 con Parkinson, se obtiene una precisión del 0,821 si se realiza una predicción de todo sí:
+Lo más destacable de estos resultados es el área bajo la curva ROC (\textit{ROC AUC}) y la precisión (\textit{accuracy}), siendo el clasificador Random Forest el mejor en ambos.
 
-\begin{equation}
-	accuracy = \frac{26 + 0}{26 + 0 + 6 + 0} = 0,8125
-\end{equation}
+El área bajo la curva ROC del clasificador es 0,776, y significa que gran parte de los ejemplos los diferencia correctamente, sin confundir una clase con la otra. En general todos los clasificadores realizan una clasificación bastante decente, ya que diferencian más o menos bien los ejemplos de una clase de los de la otra, a excepción del clasificador Naive Bayes Gaussiano. Si este clasificador se utilizara a la inversa, esto es, cuando prediga sí decir no y viceversa, tendría un valor de 0,533 ($1 - 0,467$), que aunque no sea demasiado optimista, sería mejor que utilizarlo tal y como está.
 
-Por esta razón, aunque la mejor precisión sea 0,8125, no se debe considerar como buena, ya que no realizará bien la clasificación cuando se procese un vídeo de una persona sin Parkinson.
-
-El área bajo la curva ROC sí que muestra más información. Por ejemplo, el mejor clasificador en cuanto a este criterio es el Random Forest, con un 0,59, que indica que confunde muchos ejemplos, pero algunos pocos los acierta. También es bastante interesante el resultado que aparece en el clasificador Bayesiano Naive, ya que, pese a ser el peor valor de todos, es decir, 0,29, esto indica que en gran parte confunde los ejemplos de una clase con otra. Si este clasificador se utilizase a la inversa, esto es, cuando prediga sí decir que es no y viceversa, tendría un valor de 0,71 ($1 - 0,29$), que es un valor bastante bueno.
+Por otro lado, la precisión indica que hay un 71,9 \% de ejemplos bien clasificados, teniendo en cuenta que además los está identificando bien. 
 
 \subsection{Tiempos de entrenamiento}
 Se ha realizado un estudio de los tiempos que tardan en entrenar los modelos. Para ello, se han realizado 10 ejecuciones con cada modelo para conocer una aproximación del tiempo que tardan en entrenar, donde se han obtenido los siguientes resultados en segundos:
@@ -115,6 +115,14 @@ Se ha realizado un estudio de los tiempos que tardan en entrenar los modelos. Pa
 		\label{tab:tiempos_entrenamiento}
 	\end{center}
 \end{table}
+
+Además, se muestran estos datos en formato de gráfica en la figura \ref{fig:grafico_entrenamiento}.
+
+\begin{figure}[ht]
+	\includegraphics[width=1\textwidth]{grafico_entrenamiento}
+	\caption{Gráfico de barras con los tiempos medios de entrenamiento de cada modelo.}
+	\label{fig:grafico_entrenamiento}
+\end{figure} 
 
 Viendo los resultados, se puede observar que el clasificador que más destaca frente al resto es el Random Forest. Esto se debe a cómo se construye el clasificador. Dado que Random Forest es un \textit{ensemble}, es decir, que está formado por varios clasificadores, en este caso, árboles de decisión, tiene que realizar la construcción de cada árbol de decisión para construir el clasificador completo. 
 
@@ -145,13 +153,25 @@ También se ha realizado un estudio de los tiempos que tardan en predecir los mo
 	\end{center}
 \end{table}
  
+De nuevo, se muestran estos datos en formato de gráfico en la figura \ref{fig:grafico_prediccion}.
+ 
+\begin{figure}[ht]
+ 	\includegraphics[width=1\textwidth]{grafico_prediccion}
+ 	\caption{Gráfico de barras con los tiempos medios de predicción de cada modelo.}
+ 	\label{fig:grafico_prediccion}
+\end{figure}
+ 
  Nuevamente, el clasificador Random Forest lidera la tabla de tiempos, con mucha diferencia del segundo. Esto se debe por la misma razón que en el entrenamiento, es decir, que se trata de un \textit{ensemble}, pues debe realizar varias predicciones con varios árboles de decisión para poder obtener la mejor. Sin embargo, el tiempo medio es muy inferior al anterior, ya que en general, los clasificadores tardan más en construirse que en realizar la predicción. 
  
  Además, vuelve a destacar el clasificador Dummy, con un tiempo medio muy similar al de entrenamiento. El tiempo que tarda en clasificar es prácticamente insignificante, ya que la única tardanza que tiene es la de asignar a cada instancia la clase mayoritaria.
  
+ Sin embargo, estos tiempos son prácticamente insignificantes, ya que el clasificador más lento (\textit{i. e.} el Random Forest) tardaría menos de un segundo en entrenar y predecir utilizando este conjunto de ejemplos.
+ 
  \subsection{Aplicación web}
-Uno de los objetivos propuestos en este trabajo es el de realizar una aplicación web para poder predecir si, dado un vídeo de una mano de una persona, esa persona tiene Parkinson o no. Sin embargo, como se ha explicado en puntos anteriores, esta predicción no va a poder ser realizada de forma correcta, debido a que el conjunto de datos es demasiado malo como para poder entrenar un clasificador capaz de diferenciar de forma aceptable una mano con Parkinson de una que no.
+Uno de los objetivos propuestos en este trabajo es el de realizar una aplicación web para poder predecir si, dado un vídeo de una mano de una persona, esa persona tiene Parkinson o no. Sin embargo, como se ha explicado en puntos anteriores, esta predicción no va a poder ser realizada de la forma ideal, debido a que el conjunto de datos no es demasiado completo como para poder entrenar un clasificador capaz de mostrar una gran diferencia  entre varios niveles de Parkinson. Actualmente, la aplicación predirá entre un 40 y un 50 \% en caso de no tener Parkinson, y entre un 80 y un 90 \% en caso opuesto.
 
 En los resultados de la predicción, se ha destacado el área bajo la curva del clasificador Random Forest, que era superior a la del resto de los clasificadores. Por esta razón, se ha optado por utilizar este clasificador para realizar las predicciones en la aplicación web. No obstante, este modelo puede ser cambiado por el administrador en cualquier momento.
 
-Dado que el software realizado es una aplicación web, este puede ser utilizado desde dispositivos móviles. Por esta razón, se ha implementado una interfaz diferente para pantallas menores a una anchura, por lo que el menú será más cómodo de utilizar en dispositivos de pantallas pequeñas.
+Cualquier vídeo puede ser procesado en la aplicación, siempre y cuando aparezca una mano de forma clara, esta no se salga del vídeo en ningún momento y realice un mínimo de 5 movimientos. Lo ideal para que la aplicación realice la predicción de la forma más rápida y eficaz, sería hacer 10 movimientos, ya que la aplicación escoge los 5 primeros movimientos y los 5 últimos y no tiene en cuenta los movimientos intermedios. Sin embargo, un vídeo con más movimientos podría notar una fatiga en la diferencia entre los 5 primeros movimientos y los 5 últimos, pudiendo afectar en la predicción. Si únicamente se realizan 5 movimientos, la aplicación estaría escogiendo los mismos 5 movimientos ambas veces, y por esta razón, no puede haber menos de 5 movimientos. Además, el número de fotogramas afecta al tiempo de procesado del vídeo, por lo que 5 movimientos realizados de forma lenta tardarán más en procesarse que 5 movimientos realizados de forma más rápida.
+
+Dado que el \textit{software} realizado es una aplicación web, este puede ser utilizado desde dispositivos móviles. Por esta razón, se ha implementado una interfaz diferente para pantallas menores a una anchura, por lo que el menú será más cómodo de utilizar en dispositivos de pantallas pequeñas.
